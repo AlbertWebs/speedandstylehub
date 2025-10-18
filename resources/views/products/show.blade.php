@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' - ' . $product->category->name . ' | Guru Digital Kenya')
-@section('description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices. Fast delivery and excellent customer service from Guru Digital.')
-@section('keywords', $product->name . ', ' . $product->category->name . ', electronics Kenya, Guru Digital, buy online Kenya')
-@section('og_title', $product->name . ' - ' . $product->category->name . ' | Guru Digital Kenya')
+@section('title', $product->name . ' - ' . $product->category->name . ' | Speed and Style Hub Kenya')
+@section('description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices. Fast delivery and excellent customer service from Speed and Style Hub.')
+@section('keywords', $product->name . ', ' . $product->category->name . ', Fashion and Personal Care Products Kenya, Speed and Style Hub, buy online Kenya')
+@section('og_title', $product->name . ' - ' . $product->category->name . ' | Speed and Style Hub Kenya')
 @section('og_description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices.')
 @section('og_type', 'product')
 @section('og_image', $product->main_image_url)
@@ -23,7 +23,7 @@
     "category": "' . addslashes($product->category->name) . '",
     "brand": {
         "@type": "Brand",
-        "name": "' . addslashes($product->brand ?? 'Guru Digital') . '"
+        "name": "' . addslashes($product->brand ?? 'Speed and Style Hub') . '"
     },
     "offers": {
         "@type": "Offer",
@@ -33,7 +33,7 @@
         "url": "' . request()->url() . '",
         "seller": {
             "@type": "Organization",
-            "name": "Guru Digital"
+            "name": "Speed and Style Hub"
         }
     },
     "aggregateRating": {
@@ -97,20 +97,20 @@
                 <div class="aspect-w-1 aspect-h-1 w-full">
                     <img id="mainImage" src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="w-full h-full object-cover rounded-lg" style="aspect-ratio: 1/1;">
                 </div>
-                
+
                 <!-- Thumbnail Gallery -->
                 @if(count($product->all_images_urls) > 1)
                     <div class="relative">
                         <div class="flex space-x-2 overflow-x-auto scrollbar-hide" id="thumbnailContainer">
                             @foreach($product->all_images_urls as $index => $imageUrl)
-                                <img src="{{ $imageUrl }}" 
-                                     alt="{{ $product->name }} - Image {{ $index + 1 }}" 
+                                <img src="{{ $imageUrl }}"
+                                     alt="{{ $product->name }} - Image {{ $index + 1 }}"
                                      class="flex-shrink-0 w-20 h-20 object-cover rounded cursor-pointer border-2 {{ $index === 0 ? 'border-blue-500' : 'border-transparent hover:border-gray-300' }} thumbnail-image"
                                      data-image="{{ $imageUrl }}"
                                      style="width: 80px; height: 80px; min-width: 80px; max-width: 80px;">
                             @endforeach
                         </div>
-                        
+
                         <!-- Navigation Buttons -->
                         @if(count($product->all_images_urls) > 4)
                             <button class="scroll-left-btn absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-90 hover:bg-opacity-100 text-gray-800 p-1 rounded-full shadow-lg transition-all duration-200 z-10">
@@ -202,11 +202,11 @@
 
                 <!-- Action Buttons -->
                 <div class="flex space-x-4">
-                    <button onclick="addToCartWithQuantity({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}')" 
+                    <button onclick="addToCartWithQuantity({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}')"
                             class="flex-1 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
                         Add to Cart
                     </button>
-                    <button onclick="toggleWishlist({{ $product->id }}, '{{ $product->name }}')" 
+                    <button onclick="toggleWishlist({{ $product->id }}, '{{ $product->name }}')"
                             class="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:border-gray-400 transition-colors wishlist-btn">
                         <i class="fas fa-heart text-gray-400"></i>
                     </button>
@@ -328,4 +328,4 @@ input[type="number"] {
     appearance: textfield;
 }
 </style>
-@endpush 
+@endpush

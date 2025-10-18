@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Guru Digital - Quality Electronics & Technology Store in Kenya')
-@section('description', 'Shop the latest electronics and technology products in Kenya. Find smartphones, laptops, cameras, and more at Guru Digital. Fast delivery and excellent customer service.')
-@section('keywords', 'electronics Kenya, smartphones Nairobi, laptops Kenya, cameras Kenya, technology store, Guru Digital, online electronics shop')
-@section('og_title', 'Guru Digital - Quality Electronics & Technology Store in Kenya')
-@section('og_description', 'Shop the latest electronics and technology products in Kenya. Find smartphones, laptops, cameras, and more at Guru Digital.')
+@section('title', 'Speed and Style Hub - Trendy Fashion & Beauty Products in Kenya')
+@section('description', 'Shop trendy fashion and premium beauty products in Kenya. Discover stylish outfits, skincare, makeup, accessories and more at Speed and Style Hub.')
+@section('keywords', 'fashion Kenya, beauty products, makeup Nairobi, skincare Kenya, women clothing, men fashion, Speed and Style Hub, online clothing store')
+@section('og_title', 'Speed and Style Hub - Trendy Fashion & Beauty Products in Kenya')
+@section('og_description', 'Shop trendy fashion and premium beauty products in Kenya. Discover stylish outfits, skincare, makeup, accessories and more.')
 @section('og_type', 'website')
 @section('og_image', asset('images/logo.svg'))
 
@@ -22,10 +22,10 @@
 {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Guru Digital",
+    "name": "Speed and Style Hub",
     "url": "' . url('/') . '",
     "logo": "' . asset('images/logo.svg') . '",
-    "description": "Your trusted source for quality electronics and technology in Kenya",
+    "description": "Your go-to shop for stylish clothing and quality beauty products in Kenya",
     "address": {
         "@type": "PostalAddress",
         "addressCountry": "KE",
@@ -45,7 +45,7 @@
 {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Guru Digital",
+    "name": "Speed and Style Hub",
     "url": "' . url('/') . '",
     "potentialAction": {
         "@type": "SearchAction",
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Main Banner Carousel -->
                 <div class="lg:col-span-3 relative">
                     @if($carouselSlides->count() > 0)
@@ -120,7 +120,7 @@
                                 </svg>
                             </button>
                         </div>
-                        
+
                         <!-- Carousel Indicators -->
                         <div class="absolute bottom-2 lg:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-1 lg:space-x-2 z-20">
                             @foreach($carouselSlides as $index => $slide)
@@ -133,14 +133,14 @@
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 items-center">
                                 <div>
                                     <span class="text-blue-600 font-semibold text-sm lg:text-base">Welcome</span>
-                                    <h2 class="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mt-2 mb-4">Guru Digital</h2>
-                                    <p class="text-gray-600 mb-6 text-sm lg:text-base">Your trusted source for quality electronics and technology</p>
+                                    <h2 class="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mt-2 mb-4">Speed and Style Hub</h2>
+                                    <p class="text-gray-600 mb-6 text-sm lg:text-base">Your trusted source for quality home and fashion</p>
                                     <a href="{{ route('products.index') }}" class="inline-block bg-black text-white px-4 py-2 lg:px-6 lg:py-3 rounded-lg font-semibold hover:bg-gray-800 text-sm lg:text-base">
                                         Shop Now →
                                     </a>
                                 </div>
                                 <div class="hidden lg:flex justify-center lg:justify-end">
-                                    <img src="{{ asset('assets/images/1-DloPm3Vx.png') }}" alt="Electronics Product" class="max-w-xs lg:max-w-sm object-cover rounded-lg shadow-lg">
+                                    <img src="{{ asset('assets/images/holder.jpeg') }}" alt="Fashion Product" class="max-w-xs lg:max-w-sm object-cover rounded-lg shadow-lg">
                                 </div>
                             </div>
                         </div>
@@ -154,13 +154,13 @@
     <section class="py-16">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center mb-12">Our Trending Products</h2>
-            
+
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
                 @foreach($trendingProducts as $product)
                     <x-product-card :product="$product" />
                 @endforeach
             </div>
-            
+
             <div class="text-center mt-8">
                 <a href="{{ route('products.index') }}" class="inline-block border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 hover:text-white transition-colors">
                     Explore More →
@@ -174,28 +174,28 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-12">
                 <div class="text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mb-2">
-                        <span class="text-xs sm:text-sm font-semibold text-gray-600">Samsung</span>
+                    <div class="w-16 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mb-2">
+                        <span class="text-xs sm:text-sm font-semibold text-gray-600">LC Waikiki</span>
                     </div>
                 </div>
                 <div class="text-center">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mb-2">
-                        <span class="text-xs font-semibold text-gray-600">APPLE</span>
+                        <span class="text-xs font-semibold text-gray-600">Dr Davey</span>
                     </div>
                 </div>
                 <div class="text-center">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mb-2">
-                        <span class="text-xs sm:text-sm font-semibold text-gray-600">Sony</span>
+                        <span class="text-xs sm:text-sm font-semibold text-gray-600">Vaseline</span>
                     </div>
                 </div>
                 <div class="text-center">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mb-2">
-                        <span class="text-xs sm:text-sm font-semibold text-gray-600">Canon</span>
+                        <span class="text-xs sm:text-sm font-semibold text-gray-600">Dear Body</span>
                     </div>
                 </div>
                 <div class="text-center">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mb-2">
-                        <span class="text-xs sm:text-sm font-semibold text-gray-600">Dell</span>
+                        <span class="text-xs sm:text-sm font-semibold text-gray-600">St Ives</span>
                     </div>
                 </div>
             </div>
@@ -203,7 +203,7 @@
     </section>
 
     <!-- Big Sale Banner -->
-    <x-banner 
+    <x-banner
         title="Big Sale Up To 70% Off"
         subtitle="Exclusive Offers For Limited Time"
         buttonText="Explore Your Order"
@@ -215,7 +215,7 @@
     <section class="py-16">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center mb-12">Trending Categories</h2>
-            
+
             <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
                 @foreach($categories as $category)
                     <a href="{{ route('products.index', ['category' => $category->slug]) }}" class="text-center block">
@@ -242,7 +242,7 @@
                         @endforeach
                     </div>
                 </div>
-                
+
                 <!-- Featured Products -->
                 <div>
                     <h3 class="text-xl font-semibold mb-6">Featured Products</h3>
@@ -252,7 +252,7 @@
                         @endforeach
                     </div>
                 </div>
-                
+
                 <!-- Recent Products -->
                 <div class="md:col-span-2 lg:col-span-1">
                     <h3 class="text-xl font-semibold mb-6">Recent Products</h3>
@@ -265,4 +265,4 @@
             </div>
         </div>
     </section>
-@endsection 
+@endsection

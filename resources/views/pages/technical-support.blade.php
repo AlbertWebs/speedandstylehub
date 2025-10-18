@@ -11,7 +11,7 @@ use App\Models\Setting;
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-900 mb-4">Technical Support</h1>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                Need help with your purchase? Our technical support team is here to assist you with any questions 
+                Need help with your purchase? Our technical support team is here to assist you with any questions
                 or issues you may have with our products.
             </p>
         </div>
@@ -27,7 +27,7 @@ use App\Models\Setting;
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-3">Product Setup</h3>
                     <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                        Need help setting up your new device? Our team can guide you through the installation 
+                        Need help setting up your new device? Our team can guide you through the installation
                         and configuration process.
                     </p>
                     <a href="#contact" class="text-blue-600 hover:text-blue-700 font-medium text-sm">
@@ -132,18 +132,18 @@ use App\Models\Setting;
                                     <p class="text-xs text-gray-500">{{ Setting::get('business_hours_weekdays', 'Mon-Fri: 8AM-6PM, Sat: 9AM-4PM') }}</p>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-center space-x-4">
                                 <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-envelope text-green-600 text-sm"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-medium text-gray-900 text-sm">Email Support</h4>
-                                    <p class="text-gray-600 text-sm">support@gurudigital.co.ke</p>
+                                    <p class="text-gray-600 text-sm">support@speedandstylehub.com</p>
                                     <p class="text-xs text-gray-500">Response within 24 hours</p>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-center space-x-4">
                                 <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-comments text-purple-600 text-sm"></i>
@@ -168,17 +168,17 @@ use App\Models\Setting;
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                             <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        
+
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                             <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        
+
                         <div>
                             <label for="product" class="block text-sm font-medium text-gray-700 mb-1">Product (if applicable)</label>
                             <input type="text" id="product" name="product" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        
+
                         <div>
                             <label for="issue_type" class="block text-sm font-medium text-gray-700 mb-1">Issue Type</label>
                             <select id="issue_type" name="issue_type" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -192,12 +192,12 @@ use App\Models\Setting;
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                        
+
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
                             <textarea id="description" name="description" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Please describe your issue in detail..."></textarea>
                         </div>
-                        
+
                         <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
                             Submit Ticket
                         </button>
@@ -211,4 +211,4 @@ use App\Models\Setting;
 </div>
 
 
-@endsection 
+@endsection

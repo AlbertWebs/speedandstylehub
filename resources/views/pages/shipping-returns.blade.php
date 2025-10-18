@@ -11,7 +11,7 @@ use App\Models\Setting;
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-900 mb-4">Shipping & Returns</h1>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                We want you to be completely satisfied with your purchase. Learn about our shipping options, 
+                We want you to be completely satisfied with your purchase. Learn about our shipping options,
                 delivery times, and hassle-free return policy.
             </p>
         </div>
@@ -255,7 +255,7 @@ use App\Models\Setting;
                         <i class="fas fa-envelope text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Email Us</h3>
-                    <p class="text-blue-200">support@gurudigital.co.ke</p>
+                    <p class="text-blue-200">support@speedandstylehub.com</p>
                     <p class="text-sm text-blue-300">24-hour response</p>
                 </div>
                 <div>
@@ -270,4 +270,4 @@ use App\Models\Setting;
         </div>
     </div>
 </div>
-@endsection 
+@endsection

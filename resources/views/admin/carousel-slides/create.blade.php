@@ -12,14 +12,14 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <form action="{{ route('admin.carousel-slides.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
-            
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Left Column -->
                 <div class="space-y-6">
                     <!-- Title -->
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Slide Title *</label>
-                        <input type="text" id="title" name="title" value="{{ old('title') }}" required 
+                        <input type="text" id="title" name="title" value="{{ old('title') }}" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         @error('title')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -29,7 +29,7 @@
                     <!-- Description -->
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
-                        <textarea id="description" name="description" rows="4" required 
+                        <textarea id="description" name="description" rows="4" required
                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('description') }}</textarea>
                         @error('description')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -39,7 +39,7 @@
                     <!-- Button Text -->
                     <div>
                         <label for="button_text" class="block text-sm font-medium text-gray-700 mb-2">Button Text</label>
-                        <input type="text" id="button_text" name="button_text" value="{{ old('button_text') }}" 
+                        <input type="text" id="button_text" name="button_text" value="{{ old('button_text') }}"
                                placeholder="e.g., Shop Now, Learn More"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         @error('button_text')
@@ -50,7 +50,7 @@
                     <!-- Button Link -->
                     <div>
                         <label for="button_link" class="block text-sm font-medium text-gray-700 mb-2">Button Link</label>
-                        <input type="text" id="button_link" name="button_link" value="{{ old('button_link') }}" 
+                        <input type="text" id="button_link" name="button_link" value="{{ old('button_link') }}"
                                placeholder="e.g., /products, https://example.com"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         @error('button_link')
@@ -64,7 +64,7 @@
                     <!-- Image Upload -->
                     <div>
                         <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Slide Image *</label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                        <div class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center overflow-hidden">
                             <div id="image-preview" class="hidden mb-4">
                                 <img id="preview-img" src="" alt="Preview" class="max-w-full h-48 object-cover rounded-lg mx-auto">
                             </div>
@@ -73,18 +73,26 @@
                                 <p class="text-sm text-gray-600 mb-2">Click to upload or drag and drop</p>
                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 2MB</p>
                             </div>
-                            <input type="file" id="image" name="image" accept="image/*" required 
-                                   class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                            <input
+                                type="file"
+                                id="image"
+                                name="image"
+                                accept="image/*"
+                                required
+                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                style="z-index: 10;"
+                            >
                         </div>
                         @error('image')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
+
                     <!-- Background Color -->
                     <div>
                         <label for="background_color" class="block text-sm font-medium text-gray-700 mb-2">Background Color *</label>
-                        <select id="background_color" name="background_color" required 
+                        <select id="background_color" name="background_color" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                             <option value="">Select a color</option>
                             <option value="blue" {{ old('background_color') == 'blue' ? 'selected' : '' }}>Blue</option>
@@ -104,7 +112,7 @@
                     <!-- Order -->
                     <div>
                         <label for="order" class="block text-sm font-medium text-gray-700 mb-2">Display Order</label>
-                        <input type="number" id="order" name="order" value="{{ old('order') }}" min="0" 
+                        <input type="number" id="order" name="order" value="{{ old('order') }}" min="0"
                                placeholder="Leave empty for auto-assignment"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         @error('order')
@@ -136,7 +144,7 @@
 
             <!-- Submit Buttons -->
             <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
-                <a href="{{ route('admin.carousel-slides.index') }}" 
+                <a href="{{ route('admin.carousel-slides.index') }}"
                    class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                     Cancel
                 </a>
@@ -191,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             const bgClass = colorClasses[backgroundColor] || 'from-blue-100 to-blue-200';
-            
+
             slidePreview.innerHTML = `
                 <div class="bg-gradient-to-r ${bgClass} p-6 rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
@@ -213,4 +221,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endsection 
+@endsection

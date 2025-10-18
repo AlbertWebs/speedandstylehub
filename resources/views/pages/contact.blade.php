@@ -50,7 +50,7 @@ use App\Models\Setting;
                             </div>
                             <div>
                                 <h3 class="text-base font-medium text-gray-900">Email</h3>
-                                <p class="text-gray-600 text-sm">{{ Setting::get('contact_email', 'hello@gurudigital.co.ke') }}</p>
+                                <p class="text-gray-600 text-sm">{{ Setting::get('contact_email', 'hello@speedandstylehub.com') }}</p>
                                 <p class="text-xs text-gray-500">We'll respond within 24 hours</p>
                             </div>
                         </div>
@@ -122,17 +122,17 @@ use App\Models\Setting;
                             <input type="text" id="last_name" name="last_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
                         </div>
                     </div>
-                    
+
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                         <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
                     </div>
-                    
+
                     <div>
                         <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
                         <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
                     </div>
-                    
+
                     <div>
                         <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
                         <select id="subject" name="subject" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
@@ -144,12 +144,12 @@ use App\Models\Setting;
                             <option value="feedback">Feedback</option>
                         </select>
                     </div>
-                    
+
                     <div>
                         <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
                         <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Tell us how we can help you..."></textarea>
                     </div>
-                    
+
                     <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm">
                         Send Message
                     </button>
@@ -158,4 +158,4 @@ use App\Models\Setting;
         </div>
     </div>
 </div>
-@endsection 
+@endsection

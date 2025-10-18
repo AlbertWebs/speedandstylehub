@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Electronics & Technology Products - Guru Digital Kenya')
-@section('description', 'Shop the latest electronics and technology products in Kenya. Find smartphones, laptops, cameras, tablets, and more at Guru Digital. Fast delivery and excellent customer service.')
-@section('keywords', 'electronics Kenya, smartphones Nairobi, laptops Kenya, cameras Kenya, tablets Kenya, technology store, Guru Digital, online electronics shop')
-@section('og_title', 'Electronics & Technology Products - Guru Digital Kenya')
-@section('og_description', 'Shop the latest electronics and technology products in Kenya. Find smartphones, laptops, cameras, and more at Guru Digital.')
+@section('title', 'Fashion and Personal Care Products & Technology Products - Speed and Style Hub Kenya')
+@section('description', 'Shop the latest Fashion and Personal Care Products and technology products in Kenya. Find smartphones, laptops, cameras, tablets, and more at Speed and Style Hub. Fast delivery and excellent customer service.')
+@section('keywords', 'Fashion and Personal Care Products Kenya, smartphones Nairobi, laptops Kenya, cameras Kenya, tablets Kenya, technology store, Speed and Style Hub, online Fashion and Personal Care Products shop')
+@section('og_title', 'Fashion and Personal Care Products & Technology Products - Speed and Style Hub Kenya')
+@section('og_description', 'Shop the latest Fashion and Personal Care Products and technology products in Kenya. Find smartphones, laptops, cameras, and more at Speed and Style Hub.')
 @section('og_type', 'website')
 @section('og_image', asset('images/logo.svg'))
 
@@ -21,8 +21,8 @@
                 "url": "' . route('products.show', $product->slug) . '",
                 "image": "' . $product->main_image_url . '",
                 "description": "' . addslashes($product->description) . '",
-                "category": "' . addslashes($product->category->name ?? 'Electronics') . '",
-                "brand": "' . addslashes($product->brand ?? 'Guru Digital') . '",
+                "category": "' . addslashes($product->category->name ?? 'Fashion and Personal Care Products') . '",
+                "brand": "' . addslashes($product->brand ?? 'Speed and Style Hub') . '",
                 "offers": {
                     "@type": "Offer",
                     "price": "' . $product->price . '",
@@ -38,8 +38,8 @@
 {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Electronics Products",
-    "description": "Latest electronics and technology products in Kenya",
+    "name": "Fashion and Personal Care Products Products",
+    "description": "Latest Fashion and Personal Care Products and technology products in Kenya",
     "url": "' . request()->url() . '",
     "numberOfItems": ' . $products->count() . ',
     "itemListElement": [
@@ -56,7 +56,7 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-900">All Products</h1>
-                    <p class="text-gray-600 mt-2">Discover our amazing collection of electronics</p>
+                    <p class="text-gray-600 mt-2">Discover our amazing collection of Fashion and Personal Care Products</p>
                 </div>
                 <div class="mt-4 md:mt-0">
                     <p class="text-sm text-gray-500">Showing {{ $products->firstItem() ?? 0 }} - {{ $products->lastItem() ?? 0 }} of {{ $totalProducts }} products</p>
@@ -82,17 +82,17 @@
                         <i class="fas fa-chevron-down text-gray-500 transition-transform duration-200" id="filter-toggle-icon"></i>
                     </button>
                 </div>
-                
+
                 <!-- Filters Content -->
                 <div id="mobile-filters" class="lg:block hidden bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <h3 class="text-lg font-semibold mb-6">Filters</h3>
-                    
+
                     <!-- Search -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
                         <form method="GET" action="{{ route('products.index') }}">
-                            <input type="text" 
-                                   name="search" 
+                            <input type="text"
+                                   name="search"
                                    value="{{ request('search') }}"
                                    placeholder="Search products..."
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -103,12 +103,12 @@
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Categories</label>
                         <div class="space-y-2">
-                            <a href="{{ route('products.index') }}" 
+                            <a href="{{ route('products.index') }}"
                                class="block text-sm {{ !request('category') ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900' }}">
                                 All Categories
                             </a>
                             @foreach($categories as $category)
-                                <a href="{{ route('products.index', ['category' => $category->slug] + request()->except('category')) }}" 
+                                <a href="{{ route('products.index', ['category' => $category->slug] + request()->except('category')) }}"
                                    class="block text-sm {{ request('category') == $category->slug ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900' }}">
                                     {{ $category->name }}
                                 </a>
@@ -125,10 +125,10 @@
                                 <input type="hidden" name="max_price" value="{{ request('max_price') }}">
                             @endif
                             <div class="space-y-2">
-                                <input type="range" 
-                                       id="price-range" 
-                                       min="{{ $minPrice }}" 
-                                       max="{{ $maxPrice }}" 
+                                <input type="range"
+                                       id="price-range"
+                                       min="{{ $minPrice }}"
+                                       max="{{ $maxPrice }}"
                                        value="{{ request('max_price', $maxPrice) }}"
                                        class="w-full">
                                 <div class="flex justify-between text-sm text-gray-500">
@@ -144,7 +144,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
                         <div class="space-y-2">
                             @for($i = 5; $i >= 1; $i--)
-                                <a href="{{ route('products.index', ['rating' => $i] + request()->except('rating')) }}" 
+                                <a href="{{ route('products.index', ['rating' => $i] + request()->except('rating')) }}"
                                    class="flex items-center text-sm {{ request('rating') == $i ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900' }}">
                                     <div class="flex items-center mr-2">
                                         @for($star = 1; $star <= 5; $star++)
@@ -162,7 +162,7 @@
                     <!-- Clear Filters -->
                     @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'rating', 'sort']))
                         <div class="pt-4 border-t border-gray-200">
-                            <a href="{{ route('products.index') }}" 
+                            <a href="{{ route('products.index') }}"
                                class="text-sm text-red-600 hover:text-red-700 font-medium">
                                 Clear All Filters
                             </a>
@@ -197,7 +197,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                     <div class="flex items-center space-x-4 mb-4 sm:mb-0">
                         <span class="text-sm text-gray-500">Sort by:</span>
-                        <select name="sort" 
+                        <select name="sort"
                                 onchange="window.location.href='{{ route('products.index') }}?sort=' + this.value + '&' + new URLSearchParams(window.location.search).toString().replace(/sort=[^&]*&?/g, '')"
                                 class="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                             <option value="latest" {{ request('sort', 'latest') == 'latest' ? 'selected' : '' }}>Latest</option>
@@ -208,7 +208,7 @@
                             <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Name A-Z</option>
                         </select>
                     </div>
-                    
+
                     <div class="flex items-center space-x-2">
                         <button class="p-2 text-gray-400 hover:text-gray-600" title="Grid View">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -262,13 +262,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const priceRange = document.getElementById('price-range');
     const priceValue = document.getElementById('price-value');
     const priceForm = document.getElementById('price-form');
-    
+
     if (priceRange && priceValue) {
         priceRange.addEventListener('input', function() {
             const value = this.value;
             priceValue.textContent = 'KES ' + parseInt(value).toLocaleString();
         });
-        
+
         priceRange.addEventListener('change', function() {
             const url = new URL(window.location);
             url.searchParams.set('max_price', this.value);
@@ -277,4 +277,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endpush 
+@endpush

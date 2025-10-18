@@ -10,7 +10,7 @@
             <h1 class="text-2xl font-bold text-gray-900">Create Product</h1>
             <p class="text-gray-600">Add a new product to your store</p>
         </div>
-        <a href="{{ route('admin.products.index') }}" 
+        <a href="{{ route('admin.products.index') }}"
            class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
             Back to Products
         </a>
@@ -20,13 +20,13 @@
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Basic Information -->
                 <div class="space-y-4">
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name *</label>
-                        <input type="text" id="name" name="name" required 
+                        <input type="text" id="name" name="name" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('name') }}">
                         @error('name')
@@ -36,7 +36,7 @@
 
                     <div>
                         <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-                        <select id="category_id" name="category_id" required 
+                        <select id="category_id" name="category_id" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
@@ -52,9 +52,9 @@
 
                     <div>
                         <label for="brand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
-                        <input type="text" id="brand" name="brand" 
+                        <input type="text" id="brand" name="brand"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                               value="{{ old('brand') }}" placeholder="e.g., Samsung, Apple, HP">
+                               value="{{ old('brand') }}" placeholder="e.g., Vaseline, St Ives, Nice & Lovely">
                         @error('brand')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -62,7 +62,7 @@
 
                     <div>
                         <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price (KES) *</label>
-                        <input type="number" id="price" name="price" step="0.01" min="0" required 
+                        <input type="number" id="price" name="price" step="0.01" min="0" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('price') }}">
                         @error('price')
@@ -72,7 +72,7 @@
 
                     <div>
                         <label for="old_price" class="block text-sm font-medium text-gray-700 mb-1">Old Price (KES)</label>
-                        <input type="number" id="old_price" name="old_price" step="0.01" min="0" 
+                        <input type="number" id="old_price" name="old_price" step="0.01" min="0"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('old_price') }}">
                         @error('old_price')
@@ -82,7 +82,7 @@
 
                     <div>
                         <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-1">Stock Quantity *</label>
-                        <input type="number" id="stock_quantity" name="stock_quantity" min="0" required 
+                        <input type="number" id="stock_quantity" name="stock_quantity" min="0" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('stock_quantity', 0) }}">
                         @error('stock_quantity')
@@ -95,7 +95,7 @@
                 <div class="space-y-4">
                     <div>
                         <label for="badge" class="block text-sm font-medium text-gray-700 mb-1">Badge</label>
-                        <input type="text" id="badge" name="badge" 
+                        <input type="text" id="badge" name="badge"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('badge') }}" placeholder="e.g., New, Sale, Featured">
                         @error('badge')
@@ -105,7 +105,7 @@
 
                     <div>
                         <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-                        <input type="number" id="rating" name="rating" min="1" max="5" 
+                        <input type="number" id="rating" name="rating" min="1" max="5"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('rating') }}">
                         @error('rating')
@@ -115,7 +115,7 @@
 
                     <div>
                         <label for="reviews_count" class="block text-sm font-medium text-gray-700 mb-1">Reviews Count</label>
-                        <input type="number" id="reviews_count" name="reviews_count" min="0" 
+                        <input type="number" id="reviews_count" name="reviews_count" min="0"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('reviews_count', 0) }}">
                         @error('reviews_count')
@@ -144,7 +144,7 @@
             <!-- Description -->
             <div>
                 <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
-                <textarea id="description" name="description" rows="4" required 
+                <textarea id="description" name="description" rows="4" required
                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Enter product description...">{{ old('description') }}</textarea>
                 @error('description')
@@ -156,19 +156,19 @@
             <div class="space-y-4">
                 <div class="flex items-center justify-between">
                     <label class="block text-sm font-medium text-gray-700">Specifications</label>
-                    <button type="button" onclick="addSpecificationRow()" 
+                    <button type="button" onclick="addSpecificationRow()"
                             class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors">
                         Add Specification
                     </button>
                 </div>
-                
+
                 <div id="specifications-container" class="space-y-3">
                     <div class="specification-row flex items-center space-x-3">
-                        <input type="text" name="specifications[0][key]" placeholder="Specification name" 
+                        <input type="text" name="specifications[0][key]" placeholder="Specification name"
                                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <input type="text" name="specifications[0][value]" placeholder="Specification value" 
+                        <input type="text" name="specifications[0][value]" placeholder="Specification value"
                                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <button type="button" onclick="removeSpecificationRow(this)" 
+                        <button type="button" onclick="removeSpecificationRow(this)"
                                 class="text-red-600 hover:text-red-800 p-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
@@ -176,18 +176,18 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <p class="text-sm text-gray-500">Add product specifications like dimensions, weight, color, etc.</p>
             </div>
 
             <!-- Images Section -->
             <div class="space-y-6">
                 <h3 class="text-lg font-medium text-gray-900">Product Images</h3>
-                
+
                 <!-- Main Image -->
                 <div class="space-y-3">
-                    <label class="block text-sm font-medium text-gray-700">Main Image</label>
-                    
+                    <label class="block text-sm font-medium text-gray-700">Main Image(500px by 500px)</label>
+
                     <!-- Main Image Upload Area -->
                     <div class="flex items-center space-x-4">
                         <!-- Preview Area -->
@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Upload Info -->
                         <div class="flex-1">
                             <input type="file" id="image" name="image" accept="image/*" class="hidden">
@@ -223,7 +223,7 @@
                         <label class="block text-sm font-medium text-gray-700">Additional Images</label>
                         <span class="text-sm text-gray-500">Selected: <span id="image-count">0</span></span>
                     </div>
-                    
+
                     <!-- Drag and Drop Zone -->
                     <div id="image-drop-zone" class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
                         <div class="space-y-2">
@@ -248,7 +248,7 @@
 
             <!-- Submit Button -->
             <div class="flex justify-end">
-                <button type="submit" 
+                <button type="submit"
                         class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                     Create Product
                 </button>
@@ -270,20 +270,20 @@ function addSpecificationRow() {
     const container = document.getElementById('specifications-container');
     const newRow = document.createElement('div');
     newRow.className = 'specification-row flex items-center space-x-3';
-    
+
     newRow.innerHTML = `
-        <input type="text" name="specifications[${specificationIndex}][key]" placeholder="Specification name" 
+        <input type="text" name="specifications[${specificationIndex}][key]" placeholder="Specification name"
                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-        <input type="text" name="specifications[${specificationIndex}][value]" placeholder="Specification value" 
+        <input type="text" name="specifications[${specificationIndex}][value]" placeholder="Specification value"
                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-        <button type="button" onclick="removeSpecificationRow(this)" 
+        <button type="button" onclick="removeSpecificationRow(this)"
                 class="text-red-600 hover:text-red-800 p-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
             </svg>
         </button>
     `;
-    
+
     container.appendChild(newRow);
     specificationIndex++;
 }
@@ -294,4 +294,4 @@ function removeSpecificationRow(button) {
 }
 </script>
 @endpush
-@endsection 
+@endsection
