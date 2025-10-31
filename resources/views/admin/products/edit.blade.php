@@ -53,16 +53,37 @@
                         @enderror
                     </div>
 
-                    <div>
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
+                                   class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Featured Product</span>
+                        </label>
+                    </div>
+
+                    <div class="hidden">
                         <label for="brand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
                         <input type="text" id="brand" name="brand" 
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                               value="{{ old('brand', $product->brand) }}" placeholder="e.g., Samsung, Apple, HP">
+                               value="{{ old('brand', $product->brand ?? 'Speed and Style') }}" placeholder="e.g., Samsung, Apple, HP">
                         @error('brand')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
+                    <div class="hidden">
+                        <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-1">Stock Quantity *</label>
+                        <input type="number" id="stock_quantity" name="stock_quantity" min="0" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               value="{{ old('stock_quantity', $product->stock_quantity ?? 10) }}">
+                        @error('stock_quantity')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="space-y-4">
                     <div>
                         <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price (KES) *</label>
                         <input type="number" id="price" name="price" step="0.01" min="0" required 
@@ -83,32 +104,19 @@
                         @enderror
                     </div>
 
-                    <div>
-                        <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-1">Stock Quantity *</label>
-                        <input type="number" id="stock_quantity" name="stock_quantity" min="0" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                               value="{{ old('stock_quantity', $product->stock_quantity) }}">
-                        @error('stock_quantity')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Additional Information -->
-                <div class="space-y-4">
-                    <div>
+                    <div class="hidden">
                         <label for="badge" class="block text-sm font-medium text-gray-700 mb-1">Badge</label>
                         <input type="text" id="badge" name="badge" 
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                               value="{{ old('badge', $product->badge) }}" placeholder="e.g., New, Sale, Featured">
+                               value="{{ old('badge', $product->badge ?? 'New') }}" placeholder="e.g., New, Sale, Featured">
                         @error('badge')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div>
+                    <div class="hidden">
                         <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-                        <input type="number" id="rating" name="rating" min="1" max="5" 
+                        <input type="number" id="rating" name="rating" min="1" max="5" step="0.1"
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                value="{{ old('rating', $product->rating) }}">
                         @error('rating')
@@ -116,7 +124,7 @@
                         @enderror
                     </div>
 
-                    <div>
+                    <div class="hidden">
                         <label for="reviews_count" class="block text-sm font-medium text-gray-700 mb-1">Reviews Count</label>
                         <input type="number" id="reviews_count" name="reviews_count" min="0" 
                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -126,17 +134,9 @@
                         @enderror
                     </div>
 
-                    <div class="flex items-center space-x-4">
+                    <div class="hidden">
                         <label class="flex items-center">
-                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
-                                   class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <span class="ml-2 text-sm text-gray-700">Featured Product</span>
-                        </label>
-                    </div>
-
-                    <div class="flex items-center space-x-4">
-                        <label class="flex items-center">
-                            <input type="checkbox" name="is_active" value="1" {{ old('is_active', $product->is_active) ? 'checked' : '' }}
+                            <input type="checkbox" name="is_active" value="1" {{ old('is_active', $product->is_active ?? true) ? 'checked' : '' }}
                                    class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                             <span class="ml-2 text-sm text-gray-700">Active</span>
                         </label>
@@ -156,7 +156,7 @@
             </div>
 
             <!-- Specifications -->
-            <div class="space-y-4">
+            <div class="space-y-4 hidden">
                 <div class="flex items-center justify-between">
                     <label class="block text-sm font-medium text-gray-700">Specifications</label>
                     <button type="button" onclick="addSpecificationRow()" 

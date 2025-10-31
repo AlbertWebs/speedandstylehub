@@ -8,6 +8,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class ProductController extends Controller
 {
@@ -45,54 +47,87 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'description' => 'required|string',
-            'brand' => 'nullable|string|max:100',
-            'price' => 'required|numeric|min:0',
-            'old_price' => 'nullable|numeric|min:0',
-            'stock_quantity' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'badge' => 'nullable|string|max:50',
-            'rating' => 'nullable|integer|min:1|max:5',
-            'reviews_count' => 'nullable|integer|min:0',
-            'is_featured' => 'boolean',
-            'is_active' => 'boolean',
-            'specifications' => 'nullable|array',
-        ]);
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'category_id' => 'required|exists:categories,id',
+                'description' => 'required|string',
+                'brand' => 'nullable|string|max:100',
+                'price' => 'required|numeric|min:0',
+                'old_price' => 'nullable|numeric|min:0',
+                'stock_quantity' => 'required|integer|min:0',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'badge' => 'nullable|string|max:50',
+                'rating' => 'nullable|numeric|min:1|max:5',
+                'reviews_count' => 'nullable|integer|min:0',
+                'is_featured' => 'boolean',
+                'is_active' => 'boolean',
+                'specifications' => 'nullable|array',
+            ]);
 
-        $validated['slug'] = Str::slug($validated['name']);
+            $validated['slug'] = Str::slug($validated['name']);
 
-        // Handle main image upload
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('products', 'public');
-        }
-
-        // Handle additional images upload
-        if ($request->hasFile('images')) {
-            $images = [];
-            foreach ($request->file('images') as $image) {
-                $images[] = $image->store('products', 'public');
-            }
-            $validated['images'] = array_values($images);
-        }
-
-        // Process specifications
-        if (isset($validated['specifications'])) {
-            $specifications = [];
-            foreach ($validated['specifications'] as $spec) {
-                if (!empty($spec['key']) && !empty($spec['value'])) {
-                    $specifications[$spec['key']] = $spec['value'];
+            // Handle main image upload
+            if ($request->hasFile('image')) {
+                try {
+                    $validated['image'] = $request->file('image')->store('products', 'public');
+                    Log::info('Product image uploaded successfully', ['path' => $validated['image']]);
+                } catch (Exception $e) {
+                    Log::error('Failed to upload product main image', [
+                        'error' => $e->getMessage(),
+                        'file' => $request->file('image')->getClientOriginalName()
+                    ]);
+                    throw $e;
                 }
             }
-            $validated['specifications'] = $specifications;
+
+            // Handle additional images upload
+            if ($request->hasFile('images')) {
+                try {
+                    $images = [];
+                    foreach ($request->file('images') as $image) {
+                        $images[] = $image->store('products', 'public');
+                    }
+                    $validated['images'] = array_values($images);
+                    Log::info('Product additional images uploaded successfully', ['count' => count($images)]);
+                } catch (Exception $e) {
+                    Log::error('Failed to upload product additional images', [
+                        'error' => $e->getMessage()
+                    ]);
+                    throw $e;
+                }
+            }
+
+            // Process specifications
+            if (isset($validated['specifications'])) {
+                $specifications = [];
+                foreach ($validated['specifications'] as $spec) {
+                    if (!empty($spec['key']) && !empty($spec['value'])) {
+                        $specifications[$spec['key']] = $spec['value'];
+                    }
+                }
+                $validated['specifications'] = $specifications;
+            }
+
+            $product = Product::create($validated);
+            Log::info('Product created successfully', ['product_id' => $product->id, 'name' => $product->name]);
+
+            return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::warning('Product creation validation failed', [
+                'errors' => $e->errors(),
+                'input' => $request->except(['image', 'images'])
+            ]);
+            throw $e;
+        } catch (Exception $e) {
+            Log::error('Failed to create product', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'input' => $request->except(['image', 'images'])
+            ]);
+            return redirect()->back()->withInput()->with('error', 'Failed to create product. Please try again.');
         }
-
-        Product::create($validated);
-
-        return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
 
     public function show(Product $product)
@@ -108,108 +143,144 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'description' => 'required|string',
-            'brand' => 'nullable|string|max:100',
-            'price' => 'required|numeric|min:0',
-            'old_price' => 'nullable|numeric|min:0',
-            'stock_quantity' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'delete_images' => 'nullable|array',
-            'delete_images.*' => 'nullable|string',
-            'badge' => 'nullable|string|max:50',
-            'rating' => 'nullable|integer|min:1|max:5',
-            'reviews_count' => 'nullable|integer|min:0',
-            'is_featured' => 'boolean',
-            'is_active' => 'boolean',
-            'specifications' => 'nullable|array',
-        ]);
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'category_id' => 'required|exists:categories,id',
+                'description' => 'required|string',
+                'brand' => 'nullable|string|max:100',
+                'price' => 'required|numeric|min:0',
+                'old_price' => 'nullable|numeric|min:0',
+                'stock_quantity' => 'required|integer|min:0',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'delete_images' => 'nullable|array',
+                'delete_images.*' => 'nullable|string',
+                'badge' => 'nullable|string|max:50',
+                'rating' => 'nullable|numeric|min:1|max:5',
+                'reviews_count' => 'nullable|integer|min:0',
+                'is_featured' => 'boolean',
+                'is_active' => 'boolean',
+                'specifications' => 'nullable|array',
+            ]);
 
-        $validated['slug'] = Str::slug($validated['name']);
+            $validated['slug'] = Str::slug($validated['name']);
 
-        // Handle main image upload
-        if ($request->hasFile('image')) {
-            // Delete old main image if exists (only if it's a storage file)
-            if ($product->image && !str_starts_with($product->image, '/assets/')) {
-                Storage::disk('public')->delete($product->image);
-            }
-            $validated['image'] = $request->file('image')->store('products', 'public');
-        }
-
-        // Start with existing images
-        $currentImages = $product->images ?? [];
-        
-        // Clean up current images array to remove invalid entries
-        $currentImages = array_filter($currentImages, function($image) {
-            return is_string($image) && !empty(trim($image));
-        });
-
-        // Handle image deletions
-        $imagesToDelete = [];
-        
-        // Check for array format
-        if ($request->has('delete_images')) {
-            $imagesToDelete = $request->delete_images;
-        }
-        
-        // Remove duplicates and filter out empty values
-        $imagesToDelete = array_unique(array_filter($imagesToDelete, function($image) {
-            return is_string($image) && !empty(trim($image));
-        }));
-        
-        if (!empty($imagesToDelete)) {
-            // Delete main image if it's in the delete list
-            if (in_array($product->image, $imagesToDelete)) {
-                // Only delete from storage if it's a storage file (not a public asset)
-                if (!str_starts_with($product->image, '/assets/')) {
-                    Storage::disk('public')->delete($product->image);
+            // Handle main image upload
+            if ($request->hasFile('image')) {
+                try {
+                    // Delete old main image if exists (only if it's a storage file)
+                    if ($product->image && !str_starts_with($product->image, '/assets/')) {
+                        Storage::disk('public')->delete($product->image);
+                    }
+                    $validated['image'] = $request->file('image')->store('products', 'public');
+                    Log::info('Product main image updated', ['product_id' => $product->id, 'path' => $validated['image']]);
+                } catch (Exception $e) {
+                    Log::error('Failed to update product main image', [
+                        'product_id' => $product->id,
+                        'error' => $e->getMessage(),
+                        'file' => $request->file('image')->getClientOriginalName()
+                    ]);
+                    throw $e;
                 }
-                $validated['image'] = null;
-                \Log::info('Main image deleted:', ['image' => $product->image]);
+            }
+
+            // Start with existing images
+            $currentImages = $product->images ?? [];
+            
+            // Clean up current images array to remove invalid entries
+            $currentImages = array_filter($currentImages, function($image) {
+                return is_string($image) && !empty(trim($image));
+            });
+
+            // Handle image deletions
+            $imagesToDelete = [];
+            
+            // Check for array format
+            if ($request->has('delete_images')) {
+                $imagesToDelete = $request->delete_images;
             }
             
-            // Remove deleted images from current images array
-            $currentImages = array_filter($currentImages, function($image) use ($imagesToDelete) {
-                if (in_array($image, $imagesToDelete)) {
+            // Remove duplicates and filter out empty values
+            $imagesToDelete = array_unique(array_filter($imagesToDelete, function($image) {
+                return is_string($image) && !empty(trim($image));
+            }));
+            
+            if (!empty($imagesToDelete)) {
+                // Delete main image if it's in the delete list
+                if (in_array($product->image, $imagesToDelete)) {
                     // Only delete from storage if it's a storage file (not a public asset)
-                    if (!str_starts_with($image, '/assets/')) {
-                        Storage::disk('public')->delete($image);
+                    if (!str_starts_with($product->image, '/assets/')) {
+                        Storage::disk('public')->delete($product->image);
                     }
-                    \Log::info('Additional image deleted:', ['image' => $image]);
-                    return false;
+                    $validated['image'] = null;
+                    Log::info('Main image deleted:', ['product_id' => $product->id, 'image' => $product->image]);
                 }
-                return true;
-            });
-        }
-
-        // Handle additional images upload
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $currentImages[] = $image->store('products', 'public');
+                
+                // Remove deleted images from current images array
+                $currentImages = array_filter($currentImages, function($image) use ($imagesToDelete) {
+                    if (in_array($image, $imagesToDelete)) {
+                        // Only delete from storage if it's a storage file (not a public asset)
+                        if (!str_starts_with($image, '/assets/')) {
+                            Storage::disk('public')->delete($image);
+                        }
+                        Log::info('Additional image deleted:', ['image' => $image]);
+                        return false;
+                    }
+                    return true;
+                });
             }
-        }
-        
-        // Set the final images array
-        $validated['images'] = array_values($currentImages);
 
-        // Process specifications
-        if (isset($validated['specifications'])) {
-            $specifications = [];
-            foreach ($validated['specifications'] as $spec) {
-                if (!empty($spec['key']) && !empty($spec['value'])) {
-                    $specifications[$spec['key']] = $spec['value'];
+            // Handle additional images upload
+            if ($request->hasFile('images')) {
+                try {
+                    foreach ($request->file('images') as $image) {
+                        $currentImages[] = $image->store('products', 'public');
+                    }
+                    Log::info('Product additional images uploaded', ['product_id' => $product->id, 'count' => count($request->file('images'))]);
+                } catch (Exception $e) {
+                    Log::error('Failed to upload product additional images', [
+                        'product_id' => $product->id,
+                        'error' => $e->getMessage()
+                    ]);
+                    throw $e;
                 }
             }
-            $validated['specifications'] = $specifications;
+            
+            // Set the final images array
+            $validated['images'] = array_values($currentImages);
+
+            // Process specifications
+            if (isset($validated['specifications'])) {
+                $specifications = [];
+                foreach ($validated['specifications'] as $spec) {
+                    if (!empty($spec['key']) && !empty($spec['value'])) {
+                        $specifications[$spec['key']] = $spec['value'];
+                    }
+                }
+                $validated['specifications'] = $specifications;
+            }
+
+            $product->update($validated);
+            Log::info('Product updated successfully', ['product_id' => $product->id, 'name' => $product->name]);
+
+            return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::warning('Product update validation failed', [
+                'product_id' => $product->id,
+                'errors' => $e->errors(),
+                'input' => $request->except(['image', 'images'])
+            ]);
+            throw $e;
+        } catch (Exception $e) {
+            Log::error('Failed to update product', [
+                'product_id' => $product->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'input' => $request->except(['image', 'images'])
+            ]);
+            return redirect()->back()->withInput()->with('error', 'Failed to update product. Please try again.');
         }
-
-        $product->update($validated);
-
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
 
     public function testUpdate(Request $request)
@@ -244,87 +315,192 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // Delete all product images
-        if ($product->image) {
-            // Only delete from storage if it's a storage file (not a public asset)
-            if (!str_starts_with($product->image, '/assets/')) {
-                Storage::disk('public')->delete($product->image);
-            }
-        }
-        
-        if ($product->images && is_array($product->images)) {
-            foreach ($product->images as $image) {
-                // Only delete from storage if it's a storage file (not a public asset)
-                if (!str_starts_with($image, '/assets/')) {
-                    Storage::disk('public')->delete($image);
+        try {
+            $productId = $product->id;
+            $productName = $product->name;
+            
+            // Delete all product images
+            if ($product->image) {
+                try {
+                    // Only delete from storage if it's a storage file (not a public asset)
+                    if (!str_starts_with($product->image, '/assets/')) {
+                        Storage::disk('public')->delete($product->image);
+                        Log::info('Product main image deleted', ['product_id' => $productId, 'image' => $product->image]);
+                    }
+                } catch (Exception $e) {
+                    Log::error('Failed to delete product main image', [
+                        'product_id' => $productId,
+                        'image' => $product->image,
+                        'error' => $e->getMessage()
+                    ]);
                 }
             }
+            
+            if ($product->images && is_array($product->images)) {
+                foreach ($product->images as $image) {
+                    try {
+                        // Only delete from storage if it's a storage file (not a public asset)
+                        if (!str_starts_with($image, '/assets/')) {
+                            Storage::disk('public')->delete($image);
+                        }
+                    } catch (Exception $e) {
+                        Log::error('Failed to delete product additional image', [
+                            'product_id' => $productId,
+                            'image' => $image,
+                            'error' => $e->getMessage()
+                        ]);
+                    }
+                }
+            }
+            
+            $product->delete();
+            Log::info('Product deleted successfully', ['product_id' => $productId, 'name' => $productName]);
+            
+            return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('Failed to delete product', [
+                'product_id' => $product->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return redirect()->route('admin.products.index')->with('error', 'Failed to delete product. Please try again.');
         }
-        
-        $product->delete();
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
 
     public function bulkAction(Request $request)
     {
-        $action = $request->action;
-        $productIds = $request->product_ids;
+        try {
+            $action = $request->action;
+            $productIds = $request->product_ids;
 
-        if (!$productIds) {
-            return back()->with('error', 'No products selected.');
-        }
+            if (!$productIds) {
+                Log::warning('Bulk action attempted without product selection');
+                return back()->with('error', 'No products selected.');
+            }
 
-        switch ($action) {
-            case 'activate':
-                Product::whereIn('id', $productIds)->update(['is_active' => true]);
-                $message = 'Products activated successfully.';
-                break;
-            case 'deactivate':
-                Product::whereIn('id', $productIds)->update(['is_active' => false]);
-                $message = 'Products deactivated successfully.';
-                break;
-            case 'delete':
-                $products = Product::whereIn('id', $productIds)->get();
-                foreach ($products as $product) {
-                    // Delete all product images
-                    if ($product->image) {
-                        // Only delete from storage if it's a storage file (not a public asset)
-                        if (!str_starts_with($product->image, '/assets/')) {
-                            Storage::disk('public')->delete($product->image);
-                        }
+            switch ($action) {
+                case 'activate':
+                    try {
+                        Product::whereIn('id', $productIds)->update(['is_active' => true]);
+                        Log::info('Products activated via bulk action', ['product_ids' => $productIds, 'count' => count($productIds)]);
+                        $message = 'Products activated successfully.';
+                    } catch (Exception $e) {
+                        Log::error('Failed to activate products', [
+                            'product_ids' => $productIds,
+                            'error' => $e->getMessage()
+                        ]);
+                        throw $e;
                     }
-                    
-                    if ($product->images && is_array($product->images)) {
-                        foreach ($product->images as $image) {
-                            // Only delete from storage if it's a storage file (not a public asset)
-                            if (!str_starts_with($image, '/assets/')) {
-                                Storage::disk('public')->delete($image);
+                    break;
+                case 'deactivate':
+                    try {
+                        Product::whereIn('id', $productIds)->update(['is_active' => false]);
+                        Log::info('Products deactivated via bulk action', ['product_ids' => $productIds, 'count' => count($productIds)]);
+                        $message = 'Products deactivated successfully.';
+                    } catch (Exception $e) {
+                        Log::error('Failed to deactivate products', [
+                            'product_ids' => $productIds,
+                            'error' => $e->getMessage()
+                        ]);
+                        throw $e;
+                    }
+                    break;
+                case 'delete':
+                    try {
+                        $products = Product::whereIn('id', $productIds)->get();
+                        foreach ($products as $product) {
+                            // Delete all product images
+                            if ($product->image) {
+                                try {
+                                    // Only delete from storage if it's a storage file (not a public asset)
+                                    if (!str_starts_with($product->image, '/assets/')) {
+                                        Storage::disk('public')->delete($product->image);
+                                    }
+                                } catch (Exception $e) {
+                                    Log::error('Failed to delete product image in bulk delete', [
+                                        'product_id' => $product->id,
+                                        'image' => $product->image,
+                                        'error' => $e->getMessage()
+                                    ]);
+                                }
+                            }
+                            
+                            if ($product->images && is_array($product->images)) {
+                                foreach ($product->images as $image) {
+                                    try {
+                                        // Only delete from storage if it's a storage file (not a public asset)
+                                        if (!str_starts_with($image, '/assets/')) {
+                                            Storage::disk('public')->delete($image);
+                                        }
+                                    } catch (Exception $e) {
+                                        Log::error('Failed to delete product additional image in bulk delete', [
+                                            'product_id' => $product->id,
+                                            'image' => $image,
+                                            'error' => $e->getMessage()
+                                        ]);
+                                    }
+                                }
                             }
                         }
+                        Product::whereIn('id', $productIds)->delete();
+                        Log::info('Products deleted via bulk action', ['product_ids' => $productIds, 'count' => count($productIds)]);
+                        $message = 'Products deleted successfully.';
+                    } catch (Exception $e) {
+                        Log::error('Failed to delete products via bulk action', [
+                            'product_ids' => $productIds,
+                            'error' => $e->getMessage(),
+                            'trace' => $e->getTraceAsString()
+                        ]);
+                        throw $e;
                     }
-                }
-                Product::whereIn('id', $productIds)->delete();
-                $message = 'Products deleted successfully.';
-                break;
-            default:
-                return back()->with('error', 'Invalid action.');
-        }
+                    break;
+                default:
+                    Log::warning('Invalid bulk action attempted', ['action' => $action]);
+                    return back()->with('error', 'Invalid action.');
+            }
 
-        return back()->with('success', $message);
+            return back()->with('success', $message);
+        } catch (Exception $e) {
+            Log::error('Bulk action failed', [
+                'action' => $request->action,
+                'product_ids' => $request->product_ids,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return back()->with('error', 'Failed to perform bulk action. Please try again.');
+        }
     }
 
     public function uploadImage(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+        try {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
 
-        $path = $request->file('image')->store('products', 'public');
-        
-        return response()->json([
-            'success' => true,
-            'path' => $path,
-            'url' => asset('storage/' . $path)
-        ]);
+            $path = $request->file('image')->store('products', 'public');
+            Log::info('Image uploaded via uploadImage method', ['path' => $path]);
+            
+            return response()->json([
+                'success' => true,
+                'path' => $path,
+                'url' => asset('storage/' . $path)
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::warning('Image upload validation failed', ['errors' => $e->errors()]);
+            return response()->json([
+                'success' => false,
+                'errors' => $e->errors()
+            ], 422);
+        } catch (Exception $e) {
+            Log::error('Failed to upload image', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to upload image. Please try again.'
+            ], 500);
+        }
     }
 } 
