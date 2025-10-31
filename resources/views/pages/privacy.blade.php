@@ -21,12 +21,12 @@ use App\Models\Setting;
             <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">Introduction</h2>
                 <p class="text-gray-600 mb-4">
-                    At Guru Digital, we are committed to protecting your privacy and ensuring the security of your personal information. 
-                    This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, 
+                    At Speed and Style Hub, we are committed to protecting your privacy and ensuring the security of your personal information.
+                    This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website,
                     use our services, or interact with us in any way.
                 </p>
                 <p class="text-gray-600">
-                    By using our services, you agree to the collection and use of information in accordance with this policy. 
+                    By using our services, you agree to the collection and use of information in accordance with this policy.
                     If you do not agree with our policies and practices, please do not use our services.
                 </p>
             </div>
@@ -46,7 +46,7 @@ use App\Models\Setting;
                             <li>Order history and purchase behavior</li>
                         </ul>
                     </div>
-                    
+
                     <div>
                         <h3 class="text-xl font-semibold text-gray-900 mb-3">Technical Information</h3>
                         <p class="text-gray-600 mb-3">We automatically collect certain technical information:</p>
@@ -69,22 +69,22 @@ use App\Models\Setting;
                         <h3 class="font-semibold text-gray-900">Processing Orders</h3>
                         <p class="text-gray-600">To process and fulfill your orders, handle payments, and provide customer support.</p>
                     </div>
-                    
+
                     <div class="border-l-4 border-blue-600 pl-4">
                         <h3 class="font-semibold text-gray-900">Communication</h3>
                         <p class="text-gray-600">To send order confirmations, shipping updates, and respond to your inquiries.</p>
                     </div>
-                    
+
                     <div class="border-l-4 border-blue-600 pl-4">
                         <h3 class="font-semibold text-gray-900">Improving Services</h3>
                         <p class="text-gray-600">To analyze usage patterns and improve our website, products, and services.</p>
                     </div>
-                    
+
                     <div class="border-l-4 border-blue-600 pl-4">
                         <h3 class="font-semibold text-gray-900">Marketing</h3>
                         <p class="text-gray-600">To send promotional offers and newsletters (with your consent).</p>
                     </div>
-                    
+
                     <div class="border-l-4 border-blue-600 pl-4">
                         <h3 class="font-semibold text-gray-900">Legal Compliance</h3>
                         <p class="text-gray-600">To comply with legal obligations and protect our rights and safety.</p>
@@ -96,7 +96,7 @@ use App\Models\Setting;
             <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">Information Sharing and Disclosure</h2>
                 <p class="text-gray-600 mb-4">
-                    We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, 
+                    We do not sell, trade, or otherwise transfer your personal information to third parties without your consent,
                     except in the following circumstances:
                 </p>
                 <div class="space-y-4">
@@ -104,12 +104,12 @@ use App\Models\Setting;
                         <h3 class="font-semibold text-gray-900">Service Providers</h3>
                         <p class="text-gray-600">We may share information with trusted third-party service providers who assist us in operating our website, processing payments, and delivering products.</p>
                     </div>
-                    
+
                     <div class="border-l-4 border-blue-500 pl-4">
                         <h3 class="font-semibold text-gray-900">Legal Requirements</h3>
                         <p class="text-gray-600">We may disclose information when required by law or to protect our rights, property, or safety.</p>
                     </div>
-                    
+
                     <div class="border-l-4 border-purple-500 pl-4">
                         <h3 class="font-semibold text-gray-900">Business Transfers</h3>
                         <p class="text-gray-600">In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of the transaction.</p>
@@ -121,7 +121,7 @@ use App\Models\Setting;
             <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">Data Security</h2>
                 <p class="text-gray-600 mb-4">
-                    We implement appropriate technical and organizational security measures to protect your personal information against 
+                    We implement appropriate technical and organizational security measures to protect your personal information against
                     unauthorized access, alteration, disclosure, or destruction.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -167,7 +167,7 @@ use App\Models\Setting;
                     <div>
                         <h3 class="font-semibold text-gray-900 mb-2">Managing Cookies</h3>
                         <p class="text-gray-600">
-                            You can control and manage cookies through your browser settings. However, disabling certain cookies 
+                            You can control and manage cookies through your browser settings. However, disabling certain cookies
                             may affect the functionality of our website.
                         </p>
                     </div>
@@ -213,7 +213,7 @@ use App\Models\Setting;
             <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">Data Retention</h2>
                 <p class="text-gray-600 mb-4">
-                    We retain your personal information for as long as necessary to fulfill the purposes outlined in this policy, 
+                    We retain your personal information for as long as necessary to fulfill the purposes outlined in this policy,
                     unless a longer retention period is required or permitted by law.
                 </p>
                 <div class="space-y-3">
@@ -242,7 +242,7 @@ use App\Models\Setting;
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="text-center">
                         <h3 class="text-lg font-semibold mb-2">Privacy Questions</h3>
-                        <p class="text-blue-200">privacy@gurudigital.co.ke</p>
+                        <p class="text-blue-200">privacy@Speedandstylehub.com</p>
                         <p class="text-sm text-blue-300">For privacy-related inquiries</p>
                     </div>
                     <div class="text-center">
@@ -262,17 +262,17 @@ use App\Models\Setting;
             <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">Updates to This Policy</h2>
                 <p class="text-gray-600">
-                    We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, 
-                    legal, or regulatory reasons. We will notify you of any material changes by posting the new policy on this page 
+                    We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational,
+                    legal, or regulatory reasons. We will notify you of any material changes by posting the new policy on this page
                     and updating the "Last Updated" date.
                 </p>
                 <div class="mt-4 p-4 bg-gray-50">
                     <p class="text-sm text-gray-600">
-                        <strong>Last Updated:</strong> January 2025
+                        <strong>Last Updated:</strong> October 2025
                     </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection 
+@endsection
