@@ -7,7 +7,7 @@
         class="block flex justify-center items-center w-full bg-gray-100">
             <img src="{{ $product->main_image_url }}"
              alt="{{ $product->name }}" 
-             class="w-[95%] aspect-square object-contain"
+             class="w-[95%] aspect-square object-contain lg:w-[327px] lg:h-[327px]"
              itemprop="image"
              loading="lazy"
              onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=No+Image'; console.log('Image failed to load:', this.src);"
