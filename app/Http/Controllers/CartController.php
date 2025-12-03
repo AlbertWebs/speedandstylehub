@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
@@ -211,6 +212,18 @@ class CartController extends Controller
             // Clear cart
             session()->forget('cart');
             
+            // Get WhatsApp URL and redirect
+            $whatsappUrl = $this->getWhatsAppOrderUrl($order, $cartItems, $request);
+            
+            if ($whatsappUrl) {
+                // Store order info in session for success message after WhatsApp redirect
+                session()->put('order_success', [
+                    'order_number' => $order->order_number,
+                    'whatsapp_url' => $whatsappUrl
+                ]);
+                return redirect($whatsappUrl);
+            }
+            
             return redirect()->route('cart.index')->with('success', 'Order placed successfully! Order #' . $order->order_number . '. We will contact you soon.');
             
         } catch (\Exception $e) {
@@ -243,6 +256,56 @@ class CartController extends Controller
             $message->to($customerEmail)
                     ->subject('Order Confirmation - ' . $order->order_number);
         });
+    }
+
+    private function getWhatsAppOrderUrl($order, $cartItems, $request)
+    {
+        $whatsappNumber = Setting::get('whatsapp_number', '');
+        
+        if (empty($whatsappNumber)) {
+            return null;
+        }
+        
+        // Format phone number (remove spaces, dashes, and ensure it starts with country code)
+        $whatsappNumber = preg_replace('/[^0-9+]/', '', $whatsappNumber);
+        if (!str_starts_with($whatsappNumber, '+')) {
+            // If no +, assume it's a local number and add country code
+            if (str_starts_with($whatsappNumber, '0')) {
+                $whatsappNumber = '+254' . substr($whatsappNumber, 1);
+            } else {
+                $whatsappNumber = '+254' . $whatsappNumber;
+            }
+        }
+        
+        // Build order message
+        $message = "🛍️ *New Order Received*\n\n";
+        $message .= "*Order Number:* " . $order->order_number . "\n";
+        $message .= "*Customer Name:* " . $request->name . "\n";
+        $message .= "*Phone:* " . $request->phone . "\n";
+        $message .= "*Email:* " . $request->email . "\n";
+        $message .= "*Total Amount:* KES " . number_format($order->total_amount, 2) . "\n\n";
+        
+        $message .= "*Shipping Address:*\n";
+        $message .= $request->address . "\n";
+        $message .= $request->city . ", " . $request->postal_code . "\n\n";
+        
+        $message .= "*Order Items:*\n";
+        foreach ($cartItems as $item) {
+            $message .= "• " . $item['product']->name . " (x" . $item['quantity'] . ") - KES " . number_format($item['subtotal'], 2) . "\n";
+        }
+        
+        if (!empty($request->delivery_notes)) {
+            $message .= "\n*Delivery Notes:*\n" . $request->delivery_notes . "\n";
+        }
+        
+        $message .= "\n*Payment Method:* Cash on Delivery\n";
+        $message .= "*Status:* Pending";
+        
+        // URL encode the message
+        $encodedMessage = urlencode($message);
+        
+        // Create WhatsApp URL
+        return "https://wa.me/" . $whatsappNumber . "?text=" . $encodedMessage;
     }
 
     private function getCartTotal($cart)

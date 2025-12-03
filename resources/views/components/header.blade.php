@@ -110,21 +110,16 @@ use App\Models\Setting;
     <!-- Navigation Menu -->
     <nav class="bg-blue-900 hidden md:block">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center space-x-8 py-3">
-                <a href="{{ route('home') }}" class="text-white hover:text-gray-300 text-sm font-medium {{ request()->routeIs('home') ? 'text-gray-300' : '' }}">Home</a>
-                <a href="{{ route('products.index') }}" class="text-white hover:text-gray-300 text-sm font-medium {{ request()->routeIs('products.*') ? 'text-gray-300' : '' }}">Products</a>
-                <?php
-                  $Category = \App\Models\Category::take(6)->inRandomOrder()->get();
-                ?>
-                @foreach ($Category as $category)
+            <div class="flex items-center justify-center space-x-8 py-3">
+                @php
+                  $categories = \App\Models\Category::active()->ordered()->take(6)->get();
+                @endphp
+                @foreach ($categories as $category)
                     <a href="{{ route('products.index', ['category' => $category->slug]) }}"
                     class="text-white hover:text-gray-300 text-sm font-medium {{ request('category') == $category->slug ? 'text-gray-300' : '' }}">
                         {{ $category->name }}
                     </a>
                 @endforeach
-                <a href="{{ route('pages.about') }}" class="text-white hover:text-gray-300 text-sm font-medium {{ request()->routeIs('pages.about') ? 'text-gray-300' : '' }}">About</a>
-                <a href="{{ route('pages.contact') }}" class="text-white hover:text-gray-300 text-sm font-medium {{ request()->routeIs('pages.contact') ? 'text-gray-300' : '' }}">Contact</a>
-                <a href="{{ route('pages.faq') }}" class="text-white hover:text-gray-300 text-sm font-medium {{ request()->routeIs('pages.faq') ? 'text-gray-300' : '' }}">FAQ</a>
             </div>
         </div>
     </nav>

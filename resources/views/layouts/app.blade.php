@@ -36,6 +36,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
 
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Speed & Style">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Speed & Style">
+
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -57,10 +66,11 @@
 <body class="bg-gray-50">
     @include('components.header')
 
-    <main>
+    <main class="pb-16 md:pb-0">
         @yield('content')
     </main>
 
     @include('components.footer')
+    @include('components.mobile-bottom-nav')
 </body>
 </html>

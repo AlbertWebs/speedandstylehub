@@ -76,8 +76,8 @@ window.removeFromWishlist = function(productId) {
             countElement.textContent = currentCount - 1;
         }
         
-        // Update wishlist count in header
-        const wishlistCountElements = document.querySelectorAll('.wishlist-count');
+        // Update wishlist count in header and mobile nav
+        const wishlistCountElements = document.querySelectorAll('.wishlist-count, .wishlist-count-mobile');
         wishlistCountElements.forEach(element => {
             element.textContent = window.wishlist.length;
         });

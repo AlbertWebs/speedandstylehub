@@ -187,13 +187,13 @@ function initializeCart() {
         fetch('/cart/data')
             .then(response => response.json())
             .then(data => {
-                const cartCountElement = document.querySelector('.cart-count');
+                const cartCountElements = document.querySelectorAll('.cart-count, .cart-count-mobile');
                 const cartTotalElement = document.querySelector('.cart-total');
                 const cartDropdownTotalElement = document.querySelector('.cart-dropdown-total');
                 
-                if (cartCountElement) {
-                    cartCountElement.textContent = data.cart_count;
-                }
+                cartCountElements.forEach(element => {
+                    element.textContent = data.cart_count;
+                });
                 
                 if (cartTotalElement) {
                     cartTotalElement.textContent = `KES ${formatNumber(data.cart_total)}`;
@@ -512,7 +512,7 @@ function initializeWishlist() {
     
     // Update wishlist count display
     function updateWishlistCount() {
-        const wishlistCountElements = document.querySelectorAll('.wishlist-count');
+        const wishlistCountElements = document.querySelectorAll('.wishlist-count, .wishlist-count-mobile');
         wishlistCountElements.forEach(element => {
             element.textContent = wishlist.length;
         });
@@ -849,7 +849,7 @@ function initializeMobileMenu() {
 // Notification system
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
-    notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
+    notification.className = `fixed bottom-4 right-4 z-[9999] p-4 rounded-lg shadow-xl transform transition-all duration-500 translate-x-full mb-16 md:mb-4`;
     
     const colors = {
         success: 'bg-green-500 text-white',
@@ -858,30 +858,41 @@ function showNotification(message, type = 'info') {
         warning: 'bg-yellow-500 text-white'
     };
     
+    const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        info: 'fa-info-circle',
+        warning: 'fa-exclamation-triangle'
+    };
+    
     notification.className += ` ${colors[type]}`;
     notification.innerHTML = `
-        <div class="flex items-center">
-            <span>${message}</span>
-            <button class="ml-4 text-white hover:text-gray-200" onclick="this.parentElement.parentElement.remove()">
+        <div class="flex items-center space-x-3 min-w-[280px] max-w-[400px]">
+            <i class="fas ${icons[type]} text-xl"></i>
+            <span class="flex-1 font-medium">${message}</span>
+            <button class="text-white hover:text-gray-200 transition-colors" onclick="this.closest('.notification-card').remove()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
     `;
     
+    notification.classList.add('notification-card');
     document.body.appendChild(notification);
     
-    // Animate in
+    // Animate in (slide from right)
     setTimeout(() => {
         notification.classList.remove('translate-x-full');
     }, 100);
     
-    // Auto remove after 3 seconds
+    // Auto remove after 5 seconds (slide out to right)
     setTimeout(() => {
         notification.classList.add('translate-x-full');
         setTimeout(() => {
-            notification.remove();
-        }, 300);
-    }, 3000);
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 500);
+    }, 5000);
 }
 
 // Product image lazy loading

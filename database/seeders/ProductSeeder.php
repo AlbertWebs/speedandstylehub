@@ -27,14 +27,14 @@ class ProductSeeder extends Seeder
         ];
 
         $products = [
-            // Smartphones
+            // Women's Fashion
             [
-                'category_id' => $categories->where('slug', 'smartphones')->first()->id,
-                'name' => 'iPhone 15 Pro',
-                'slug' => 'iphone-15-pro',
-                'description' => 'Latest iPhone with A17 Pro chip, 48MP camera, and titanium design',
-                'price' => 189999.00,
-                'old_price' => 199999.00,
+                'category_id' => $categories->where('slug', 'womens-fashion')->first()->id,
+                'name' => 'Elegant Floral Summer Dress',
+                'slug' => 'elegant-floral-summer-dress',
+                'description' => 'Beautiful floral print summer dress perfect for any occasion',
+                'price' => 8500.00,
+                'old_price' => 12000.00,
                 'image' => $images[0],
                 'images' => [
                     $images[1],
@@ -48,19 +48,19 @@ class ProductSeeder extends Seeder
                 'stock_quantity' => 25,
                 'is_featured' => true,
                 'specifications' => [
-                    'screen' => '6.1 inch Super Retina XDR',
-                    'storage' => '128GB',
-                    'color' => 'Natural Titanium',
-                    'camera' => '48MP Main Camera'
+                    'material' => '100% Cotton',
+                    'size' => 'Available in S, M, L, XL',
+                    'care' => 'Machine washable',
+                    'style' => 'Casual/Formal'
                 ]
             ],
             [
-                'category_id' => $categories->where('slug', 'smartphones')->first()->id,
-                'name' => 'Samsung Galaxy S24 Ultra',
-                'slug' => 'samsung-galaxy-s24-ultra',
-                'description' => 'Premium Android flagship with S Pen and AI features',
-                'price' => 175000.00,
-                'old_price' => 185000.00,
+                'category_id' => $categories->where('slug', 'womens-fashion')->first()->id,
+                'name' => 'Classic Black Blazer',
+                'slug' => 'classic-black-blazer',
+                'description' => 'Professional black blazer for office and formal events',
+                'price' => 15000.00,
+                'old_price' => 18000.00,
                 'image' => $images[1],
                 'images' => [
                     $images[2],
@@ -74,270 +74,340 @@ class ProductSeeder extends Seeder
                 'stock_quantity' => 20,
                 'is_featured' => true,
                 'specifications' => [
-                    'screen' => '6.8 inch Dynamic AMOLED',
-                    'storage' => '256GB',
-                    'color' => 'Titanium Gray',
-                    'camera' => '200MP Main Camera'
+                    'material' => 'Polyester Blend',
+                    'size' => 'Available in S, M, L, XL',
+                    'care' => 'Dry clean only',
+                    'style' => 'Formal'
                 ]
             ],
             [
-                'category_id' => $categories->where('slug', 'smartphones')->first()->id,
-                'name' => 'Tecno Camon 20 Pro',
-                'slug' => 'tecno-camon-20-pro',
-                'description' => 'Affordable smartphone with great camera performance',
-                'price' => 45000.00,
+                'category_id' => $categories->where('slug', 'womens-fashion')->first()->id,
+                'name' => 'Comfortable Denim Jeans',
+                'slug' => 'comfortable-denim-jeans',
+                'description' => 'Stylish and comfortable denim jeans for everyday wear',
+                'price' => 4500.00,
                 'image' => $images[2],
                 'rating' => 4,
                 'reviews_count' => 67,
                 'stock_quantity' => 50,
                 'specifications' => [
-                    'screen' => '6.67 inch AMOLED',
-                    'storage' => '256GB',
-                    'color' => 'Dark Matter',
-                    'camera' => '108MP Main Camera'
+                    'material' => '98% Cotton, 2% Elastane',
+                    'size' => 'Available in 28-38',
+                    'care' => 'Machine washable',
+                    'style' => 'Casual'
                 ]
             ],
 
-            // Laptops & Computers
+            // Men's Fashion
             [
-                'category_id' => $categories->where('slug', 'laptops-computers')->first()->id,
-                'name' => 'MacBook Pro 14" M3',
-                'slug' => 'macbook-pro-14-m3',
-                'description' => 'Professional laptop with M3 chip for creators and developers',
-                'price' => 450000.00,
-                'old_price' => 480000.00,
+                'category_id' => $categories->where('slug', 'mens-fashion')->first()->id,
+                'name' => 'Premium Cotton T-Shirt',
+                'slug' => 'premium-cotton-t-shirt',
+                'description' => 'High-quality cotton t-shirt in various colors',
+                'price' => 2500.00,
+                'old_price' => 3500.00,
                 'image' => $images[3],
                 'images' => [
                     $images[4],
                     $images[0],
                     $images[1],
-                    $images[2],
-                    $images[3]
+                    $images[2]
                 ],
                 'badge' => 'HOT',
                 'rating' => 5,
                 'reviews_count' => 234,
+                'stock_quantity' => 100,
+                'is_featured' => true,
+                'specifications' => [
+                    'material' => '100% Premium Cotton',
+                    'size' => 'Available in S, M, L, XL, XXL',
+                    'care' => 'Machine washable',
+                    'style' => 'Casual'
+                ]
+            ],
+            [
+                'category_id' => $categories->where('slug', 'mens-fashion')->first()->id,
+                'name' => 'Formal Business Suit',
+                'slug' => 'formal-business-suit',
+                'description' => 'Elegant two-piece business suit for professional occasions',
+                'price' => 25000.00,
+                'old_price' => 30000.00,
+                'image' => $images[4],
+                'badge' => 'SALE',
+                'rating' => 5,
+                'reviews_count' => 156,
                 'stock_quantity' => 15,
                 'is_featured' => true,
                 'specifications' => [
-                    'processor' => 'Apple M3 Chip',
-                    'memory' => '16GB Unified Memory',
-                    'storage' => '512GB SSD',
-                    'display' => '14-inch Liquid Retina XDR'
+                    'material' => 'Wool Blend',
+                    'size' => 'Available in 38-48',
+                    'care' => 'Dry clean only',
+                    'style' => 'Formal'
                 ]
             ],
             [
-                'category_id' => $categories->where('slug', 'laptops-computers')->first()->id,
-                'name' => 'Dell XPS 13 Plus',
-                'slug' => 'dell-xps-13-plus',
-                'description' => 'Premium Windows laptop with stunning design',
-                'price' => 320000.00,
-                'image' => $images[4],
+                'category_id' => $categories->where('slug', 'mens-fashion')->first()->id,
+                'name' => 'Casual Chino Pants',
+                'slug' => 'casual-chino-pants',
+                'description' => 'Versatile chino pants perfect for smart casual wear',
+                'price' => 5500.00,
+                'image' => $images[0],
                 'rating' => 4,
-                'reviews_count' => 156,
-                'stock_quantity' => 12,
+                'reviews_count' => 89,
+                'stock_quantity' => 40,
                 'specifications' => [
-                    'processor' => 'Intel Core i7-1360P',
-                    'memory' => '16GB LPDDR5',
-                    'storage' => '512GB SSD',
-                    'display' => '13.4-inch OLED'
+                    'material' => 'Cotton Twill',
+                    'size' => 'Available in 30-40',
+                    'care' => 'Machine washable',
+                    'style' => 'Smart Casual'
                 ]
             ],
 
-            // TVs & Home Entertainment
+            // Skincare
             [
-                'category_id' => $categories->where('slug', 'tvs-home-entertainment')->first()->id,
-                'name' => 'Samsung 65" QLED 4K TV',
-                'slug' => 'samsung-65-qled-4k-tv',
-                'description' => 'Premium QLED TV with Quantum HDR and Smart TV features',
-                'price' => 280000.00,
-                'old_price' => 320000.00,
-                'image' => $images[0],
+                'category_id' => $categories->where('slug', 'skincare')->first()->id,
+                'name' => 'Vitamin C Brightening Serum',
+                'slug' => 'vitamin-c-brightening-serum',
+                'description' => 'Powerful vitamin C serum for brightening and evening skin tone',
+                'price' => 4500.00,
+                'old_price' => 6000.00,
+                'image' => $images[1],
                 'images' => [
-                    $images[1],
                     $images[2],
                     $images[3]
                 ],
-                'badge' => '-12%',
+                'badge' => '-25%',
                 'rating' => 5,
                 'reviews_count' => 189,
-                'stock_quantity' => 8,
+                'stock_quantity' => 35,
                 'is_featured' => true,
                 'specifications' => [
-                    'screen_size' => '65 inches',
-                    'resolution' => '4K Ultra HD',
-                    'hdr' => 'Quantum HDR',
-                    'smart_tv' => 'Tizen OS'
+                    'volume' => '30ml',
+                    'skin_type' => 'All skin types',
+                    'key_ingredient' => '20% Vitamin C',
+                    'benefits' => 'Brightening, Anti-aging'
                 ]
             ],
-
-            // Audio & Headphones
             [
-                'category_id' => $categories->where('slug', 'audio-headphones')->first()->id,
-                'name' => 'Sony WH-1000XM5',
-                'slug' => 'sony-wh-1000xm5',
-                'description' => 'Industry-leading noise canceling headphones',
-                'price' => 85000.00,
-                'old_price' => 95000.00,
-                'image' => $images[1],
-                'badge' => 'SALE',
+                'category_id' => $categories->where('slug', 'skincare')->first()->id,
+                'name' => 'Hyaluronic Acid Moisturizer',
+                'slug' => 'hyaluronic-acid-moisturizer',
+                'description' => 'Intensive hydrating moisturizer with hyaluronic acid',
+                'price' => 3500.00,
+                'image' => $images[2],
                 'rating' => 5,
                 'reviews_count' => 342,
-                'stock_quantity' => 30,
+                'stock_quantity' => 50,
                 'is_featured' => true,
                 'specifications' => [
-                    'type' => 'Over-ear',
-                    'noise_canceling' => 'Industry-leading',
-                    'battery' => '30 hours',
-                    'connectivity' => 'Bluetooth 5.2'
+                    'volume' => '50ml',
+                    'skin_type' => 'Dry to Normal',
+                    'key_ingredient' => 'Hyaluronic Acid',
+                    'benefits' => 'Hydration, Plumping'
                 ]
             ],
             [
-                'category_id' => $categories->where('slug', 'audio-headphones')->first()->id,
-                'name' => 'JBL Flip 6 Bluetooth Speaker',
-                'slug' => 'jbl-flip-6-bluetooth-speaker',
-                'description' => 'Portable waterproof speaker with powerful sound',
-                'price' => 15000.00,
-                'image' => $images[2],
-                'rating' => 4,
-                'reviews_count' => 98,
-                'stock_quantity' => 45,
-                'specifications' => [
-                    'type' => 'Portable Bluetooth',
-                    'waterproof' => 'IPX7',
-                    'battery' => '12 hours',
-                    'connectivity' => 'Bluetooth 5.1'
-                ]
-            ],
-
-            // Cameras & Photography
-            [
-                'category_id' => $categories->where('slug', 'cameras-photography')->first()->id,
-                'name' => 'Canon EOS R6 Mark II',
-                'slug' => 'canon-eos-r6-mark-ii',
-                'description' => 'Full-frame mirrorless camera for professional photography',
-                'price' => 420000.00,
-                'old_price' => 450000.00,
+                'category_id' => $categories->where('slug', 'skincare')->first()->id,
+                'name' => 'Retinol Night Cream',
+                'slug' => 'retinol-night-cream',
+                'description' => 'Advanced anti-aging night cream with retinol',
+                'price' => 6500.00,
+                'old_price' => 8000.00,
                 'image' => $images[3],
-                'badge' => 'HOT',
+                'badge' => 'SALE',
                 'rating' => 5,
-                'reviews_count' => 156,
-                'stock_quantity' => 10,
-                'is_featured' => true,
+                'reviews_count' => 267,
+                'stock_quantity' => 28,
                 'specifications' => [
-                    'sensor' => '24.2MP Full-frame CMOS',
-                    'video' => '4K 60p',
-                    'autofocus' => 'Dual Pixel CMOS AF II',
-                    'connectivity' => 'Wi-Fi & Bluetooth'
+                    'volume' => '50ml',
+                    'skin_type' => 'Mature skin',
+                    'key_ingredient' => '1% Retinol',
+                    'benefits' => 'Anti-aging, Wrinkle reduction'
                 ]
             ],
 
-            // Gaming
+            // Makeup
             [
-                'category_id' => $categories->where('slug', 'gaming')->first()->id,
-                'name' => 'PlayStation 5 Console',
-                'slug' => 'playstation-5-console',
-                'description' => 'Next-gen gaming console with DualSense controller',
-                'price' => 85000.00,
-                'old_price' => 95000.00,
+                'category_id' => $categories->where('slug', 'makeup')->first()->id,
+                'name' => 'Matte Lipstick Set',
+                'slug' => 'matte-lipstick-set',
+                'description' => 'Long-lasting matte lipstick in 6 trendy shades',
+                'price' => 5500.00,
+                'old_price' => 7500.00,
                 'image' => $images[4],
                 'images' => [
                     $images[0],
                     $images[1],
                     $images[2]
                 ],
-                'badge' => 'SALE',
+                'badge' => 'HOT',
                 'rating' => 5,
                 'reviews_count' => 423,
-                'stock_quantity' => 15,
+                'stock_quantity' => 30,
                 'is_featured' => true,
                 'specifications' => [
-                    'storage' => '825GB SSD',
-                    'resolution' => '4K Gaming',
-                    'ray_tracing' => 'Hardware-accelerated',
-                    'controller' => 'DualSense included'
+                    'shades' => '6 colors',
+                    'finish' => 'Matte',
+                    'longevity' => '12 hours',
+                    'formula' => 'Creamy, Non-drying'
                 ]
             ],
-
-            // Smart Home
             [
-                'category_id' => $categories->where('slug', 'smart-home')->first()->id,
-                'name' => 'Google Nest Hub Max',
-                'slug' => 'google-nest-hub-max',
-                'description' => 'Smart display with Google Assistant and camera',
-                'price' => 35000.00,
+                'category_id' => $categories->where('slug', 'makeup')->first()->id,
+                'name' => 'Full Coverage Foundation',
+                'slug' => 'full-coverage-foundation',
+                'description' => 'Buildable full coverage foundation for flawless skin',
+                'price' => 4500.00,
                 'image' => $images[0],
                 'rating' => 4,
-                'reviews_count' => 89,
-                'stock_quantity' => 25,
-                'specifications' => [
-                    'screen' => '10-inch HD display',
-                    'speaker' => 'Stereo speakers',
-                    'camera' => '6.5MP camera',
-                    'assistant' => 'Google Assistant'
-                ]
-            ],
-
-            // Wearables
-            [
-                'category_id' => $categories->where('slug', 'wearables')->first()->id,
-                'name' => 'Apple Watch Series 9',
-                'slug' => 'apple-watch-series-9',
-                'description' => 'Latest Apple Watch with health monitoring features',
-                'price' => 75000.00,
-                'old_price' => 85000.00,
-                'image' => $images[1],
-                'badge' => 'NEW',
-                'rating' => 5,
-                'reviews_count' => 234,
-                'stock_quantity' => 20,
+                'reviews_count' => 298,
+                'stock_quantity' => 45,
                 'is_featured' => true,
                 'specifications' => [
-                    'screen' => 'Always-On Retina display',
-                    'gps' => 'Built-in GPS',
-                    'water_resistant' => '50m',
-                    'battery' => '18 hours'
+                    'volume' => '30ml',
+                    'coverage' => 'Full coverage',
+                    'finish' => 'Natural matte',
+                    'shades' => '15 shades available'
                 ]
             ],
-
-            // Tablets
             [
-                'category_id' => $categories->where('slug', 'tablets')->first()->id,
-                'name' => 'iPad Air 5th Generation',
-                'slug' => 'ipad-air-5th-generation',
-                'description' => 'Powerful tablet with M1 chip and Apple Pencil support',
-                'price' => 120000.00,
-                'old_price' => 135000.00,
-                'image' => $images[2],
+                'category_id' => $categories->where('slug', 'makeup')->first()->id,
+                'name' => 'Eyeshadow Palette',
+                'slug' => 'eyeshadow-palette',
+                'description' => 'Professional 12-shade eyeshadow palette',
+                'price' => 3500.00,
+                'old_price' => 5000.00,
+                'image' => $images[1],
                 'badge' => 'SALE',
                 'rating' => 5,
                 'reviews_count' => 187,
-                'stock_quantity' => 18,
-                'is_featured' => true,
+                'stock_quantity' => 38,
                 'specifications' => [
-                    'screen' => '10.9-inch Liquid Retina',
-                    'processor' => 'Apple M1 chip',
-                    'storage' => '256GB',
-                    'pencil' => 'Apple Pencil compatible'
+                    'shades' => '12 colors',
+                    'finish' => 'Matte & Shimmer',
+                    'pigmentation' => 'Highly pigmented',
+                    'formula' => 'Creamy, Blendable'
                 ]
             ],
 
             // Accessories
             [
                 'category_id' => $categories->where('slug', 'accessories')->first()->id,
-                'name' => 'Anker PowerCore 20000mAh',
-                'slug' => 'anker-powercore-20000mah',
-                'description' => 'High-capacity portable charger for all devices',
+                'name' => 'Leather Crossbody Bag',
+                'slug' => 'leather-crossbody-bag',
+                'description' => 'Stylish genuine leather crossbody bag with adjustable strap',
                 'price' => 8500.00,
+                'old_price' => 12000.00,
+                'image' => $images[2],
+                'badge' => 'NEW',
+                'rating' => 5,
+                'reviews_count' => 234,
+                'stock_quantity' => 20,
+                'is_featured' => true,
+                'specifications' => [
+                    'material' => 'Genuine Leather',
+                    'size' => 'Medium (30cm x 20cm)',
+                    'color' => 'Black, Brown, Tan',
+                    'features' => 'Adjustable strap, Multiple compartments'
+                ]
+            ],
+            [
+                'category_id' => $categories->where('slug', 'accessories')->first()->id,
+                'name' => 'Silver Pendant Necklace',
+                'slug' => 'silver-pendant-necklace',
+                'description' => 'Elegant sterling silver pendant necklace',
+                'price' => 4500.00,
                 'image' => $images[3],
                 'rating' => 4,
                 'reviews_count' => 156,
                 'stock_quantity' => 60,
                 'specifications' => [
-                    'capacity' => '20000mAh',
-                    'output' => '18W USB-C',
-                    'ports' => '2 USB-A, 1 USB-C',
-                    'compatibility' => 'All devices'
+                    'material' => 'Sterling Silver',
+                    'length' => '45cm chain',
+                    'pendant' => 'Heart-shaped',
+                    'care' => 'Tarnish-resistant'
+                ]
+            ],
+            [
+                'category_id' => $categories->where('slug', 'accessories')->first()->id,
+                'name' => 'Designer Sunglasses',
+                'slug' => 'designer-sunglasses',
+                'description' => 'UV protection sunglasses with polarized lenses',
+                'price' => 5500.00,
+                'old_price' => 7500.00,
+                'image' => $images[4],
+                'badge' => 'SALE',
+                'rating' => 5,
+                'reviews_count' => 189,
+                'stock_quantity' => 35,
+                'specifications' => [
+                    'lens' => 'Polarized',
+                    'uv_protection' => '100% UV400',
+                    'frame' => 'Acetate',
+                    'style' => 'Aviator, Wayfarer, Cat-eye'
+                ]
+            ],
+
+            // Fragrances
+            [
+                'category_id' => $categories->where('slug', 'fragrances')->first()->id,
+                'name' => 'Women\'s Floral Perfume',
+                'slug' => 'womens-floral-perfume',
+                'description' => 'Luxurious floral fragrance with notes of rose and jasmine',
+                'price' => 12000.00,
+                'old_price' => 15000.00,
+                'image' => $images[0],
+                'images' => [
+                    $images[1],
+                    $images[2]
+                ],
+                'badge' => 'SALE',
+                'rating' => 5,
+                'reviews_count' => 312,
+                'stock_quantity' => 25,
+                'is_featured' => true,
+                'specifications' => [
+                    'volume' => '100ml',
+                    'notes' => 'Rose, Jasmine, Vanilla',
+                    'longevity' => '8-10 hours',
+                    'type' => 'Eau de Parfum'
+                ]
+            ],
+            [
+                'category_id' => $categories->where('slug', 'fragrances')->first()->id,
+                'name' => 'Men\'s Woody Cologne',
+                'slug' => 'mens-woody-cologne',
+                'description' => 'Bold and masculine cologne with woody and spicy notes',
+                'price' => 11000.00,
+                'old_price' => 14000.00,
+                'image' => $images[1],
+                'badge' => 'NEW',
+                'rating' => 5,
+                'reviews_count' => 278,
+                'stock_quantity' => 22,
+                'is_featured' => true,
+                'specifications' => [
+                    'volume' => '100ml',
+                    'notes' => 'Cedar, Bergamot, Amber',
+                    'longevity' => '10-12 hours',
+                    'type' => 'Eau de Toilette'
+                ]
+            ],
+            [
+                'category_id' => $categories->where('slug', 'fragrances')->first()->id,
+                'name' => 'Unisex Fresh Fragrance',
+                'slug' => 'unisex-fresh-fragrance',
+                'description' => 'Light and fresh unisex fragrance perfect for everyday wear',
+                'price' => 9500.00,
+                'image' => $images[2],
+                'rating' => 4,
+                'reviews_count' => 145,
+                'stock_quantity' => 30,
+                'specifications' => [
+                    'volume' => '100ml',
+                    'notes' => 'Citrus, Green Tea, White Musk',
+                    'longevity' => '6-8 hours',
+                    'type' => 'Eau de Parfum'
                 ]
             ]
         ];

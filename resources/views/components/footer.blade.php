@@ -10,32 +10,32 @@ use App\Helpers\SocialMediaHelper;
             <div class="flex items-center space-x-3">
                 <i class="fas fa-shipping-fast text-white text-xl"></i>
                 <div>
-                    <h4 class="text-white font-semibold">FREE DELIVERY</h4>
-                    <p class="text-gray-300 text-sm">On orders over KES 5,000</p>
+                    <h4 class="text-white font-semibold">{{ Setting::get('footer_free_delivery_title', 'FREE DELIVERY') }}</h4>
+                    <p class="text-gray-300 text-sm">{{ Setting::get('footer_free_delivery_text', 'On orders over KES 5,000') }}</p>
                 </div>
             </div>
 
             <div class="flex items-center space-x-3">
                 <i class="fas fa-credit-card text-white text-xl"></i>
                 <div>
-                    <h4 class="text-white font-semibold">SECURE CHECKOUT</h4>
-                    <p class="text-gray-300 text-sm">Shop safely and confidently</p>
+                    <h4 class="text-white font-semibold">{{ Setting::get('footer_secure_checkout_title', 'SECURE CHECKOUT') }}</h4>
+                    <p class="text-gray-300 text-sm">{{ Setting::get('footer_secure_checkout_text', 'Shop safely and confidently') }}</p>
                 </div>
             </div>
 
             <div class="flex items-center space-x-3">
                 <i class="fas fa-sync-alt text-white text-xl"></i>
                 <div>
-                    <h4 class="text-white font-semibold">EASY RETURNS</h4>
-                    <p class="text-gray-300 text-sm">15-day return window</p>
+                    <h4 class="text-white font-semibold">{{ Setting::get('footer_easy_returns_title', 'EASY RETURNS') }}</h4>
+                    <p class="text-gray-300 text-sm">{{ Setting::get('footer_easy_returns_text', '15-day return window') }}</p>
                 </div>
             </div>
 
             <div class="flex items-center space-x-3">
                 <i class="fas fa-headset text-white text-xl"></i>
                 <div>
-                    <h4 class="text-white font-semibold">CUSTOMER CARE</h4>
-                    <p class="text-gray-300 text-sm">We're here 24/7</p>
+                    <h4 class="text-white font-semibold">{{ Setting::get('footer_customer_care_title', 'CUSTOMER CARE') }}</h4>
+                    <p class="text-gray-300 text-sm">{{ Setting::get('footer_customer_care_text', 'We\'re here 24/7') }}</p>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@ use App\Helpers\SocialMediaHelper;
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Company Info -->
             <div>
-                <h3 class="text-2xl font-bold text-pink-500 mb-4">Speed and Style Hub</h3>
+                <h3 class="text-2xl font-bold text-pink-500 mb-4">{{ Setting::get('site_name', config('app.name', 'Speed and Style Hub')) }}</h3>
                 <p class="text-gray-400 mb-4">{{ Setting::get('contact_address', 'Westlands, Nairobi') }}, {{ Setting::get('contact_city', 'Kenya') }}</p>
                 <p class="text-gray-400 mb-2">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
                 <p class="text-gray-400 mb-6">{{ Setting::get('contact_email', 'hello@speedandstylehub.com') }}</p>
@@ -104,8 +104,8 @@ use App\Helpers\SocialMediaHelper;
 
             <!-- Subscribe -->
             <div>
-                <h4 class="text-lg font-semibold mb-4">SUBSCRIBE</h4>
-                <p class="text-gray-400 mb-4">Get the latest trends, beauty tips, and exclusive offers delivered to your inbox.</p>
+                <h4 class="text-lg font-semibold mb-4">{{ Setting::get('footer_subscribe_title', 'SUBSCRIBE') }}</h4>
+                <p class="text-gray-400 mb-4">{{ Setting::get('footer_subscribe_text', 'Get the latest trends, beauty tips, and exclusive offers delivered to your inbox.') }}</p>
 
                 <!-- Email Subscription -->
                 <div class="flex mb-6">
@@ -122,8 +122,10 @@ use App\Helpers\SocialMediaHelper;
     <div class="bg-gray-800 py-4">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-center text-gray-400 text-sm">
-                © 2025 Speed and Style Hub. Designed & Developed by
-                <a href="https://designekta.com" target="_blank" class="text-white hover:text-pink-400 transition-colors">Designekta Studios</a>.
+                @php
+                    $defaultCopyright = '© ' . date('Y') . ' ' . config('app.name', 'Speed and Style Hub') . '. Designed & Developed by <a href="https://designekta.com" target="_blank" class="text-white hover:text-pink-400 transition-colors">Designekta Studios</a>.';
+                @endphp
+                {!! Setting::get('footer_copyright', $defaultCopyright) !!}
             </p>
         </div>
     </div>

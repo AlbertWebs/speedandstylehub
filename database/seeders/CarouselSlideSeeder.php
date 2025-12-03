@@ -15,30 +15,30 @@ class CarouselSlideSeeder extends Seeder
     {
         $slides = [
             [
-                'title' => 'New Collection',
-                'description' => 'Latest electronics with cutting-edge technology and innovation',
+                'title' => 'New Fashion Collection',
+                'description' => 'Discover the latest trends in women\'s and men\'s fashion',
                 'image' => null, // Will be uploaded through admin panel
-                'button_text' => 'Buy Now',
+                'button_text' => 'Shop Now',
                 'button_link' => '/products',
                 'background_color' => 'blue',
                 'order' => 1,
                 'is_active' => true,
             ],
             [
-                'title' => 'Limited Time',
-                'description' => 'Get the latest smartphones with amazing features and performance',
+                'title' => 'Beauty Essentials',
+                'description' => 'Premium skincare and makeup products for your beauty routine',
                 'image' => null, // Will be uploaded through admin panel
-                'button_text' => 'Shop Now',
+                'button_text' => 'Explore',
                 'button_link' => '/products',
-                'background_color' => 'green',
+                'background_color' => 'pink',
                 'order' => 2,
                 'is_active' => true,
             ],
             [
-                'title' => 'Exclusive Deal',
-                'description' => 'Experience immersive gaming and entertainment like never before',
+                'title' => 'Summer Sale',
+                'description' => 'Up to 30% off on fashion, accessories, and beauty products',
                 'image' => null, // Will be uploaded through admin panel
-                'button_text' => 'Explore',
+                'button_text' => 'Shop Sale',
                 'button_link' => '/products',
                 'background_color' => 'purple',
                 'order' => 3,

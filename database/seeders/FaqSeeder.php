@@ -16,8 +16,8 @@ class FaqSeeder extends Seeder
         $faqs = [
             // General Questions
             [
-                'question' => 'What is Guru Digital?',
-                'answer' => 'Guru Digital is Kenya\'s premier destination for cutting-edge electronics and digital solutions. We offer a wide range of products including smartphones, laptops, TVs, gaming consoles, and accessories from top brands at competitive prices.',
+                'question' => 'What is Speed and Style Hub?',
+                'answer' => 'Speed and Style Hub is Kenya\'s premier destination for fashion, beauty, and lifestyle products. We offer a wide range of products including women\'s and men\'s fashion, skincare, makeup, accessories, and fragrances from top brands at competitive prices.',
                 'category' => 'general',
                 'order' => 1,
                 'is_active' => true
@@ -38,7 +38,7 @@ class FaqSeeder extends Seeder
             ],
             [
                 'question' => 'Are your products genuine?',
-                'answer' => 'Absolutely! We only sell genuine, authentic products from authorized distributors and manufacturers. All our products come with official warranties and are guaranteed to be 100% authentic.',
+                'answer' => 'Absolutely! We only sell genuine, authentic products from authorized distributors and manufacturers. All our fashion, beauty, and skincare products are guaranteed to be 100% authentic and come with quality assurance.',
                 'category' => 'general',
                 'order' => 4,
                 'is_active' => true
@@ -143,22 +143,22 @@ class FaqSeeder extends Seeder
                 'is_active' => true
             ],
             [
-                'question' => 'What warranty do your products come with?',
-                'answer' => 'All products come with manufacturer warranty (typically 1 year). We also offer extended warranty options for most items. Warranty terms vary by product and manufacturer.',
+                'question' => 'What is your return policy for beauty products?',
+                'answer' => 'For hygiene reasons, opened beauty and skincare products cannot be returned. Unopened products in original packaging can be returned within 14 days. Clothing and accessories can be returned within 30 days if unworn with tags attached.',
                 'category' => 'technical',
                 'order' => 2,
                 'is_active' => true
             ],
             [
-                'question' => 'Do you offer installation services?',
-                'answer' => 'Yes, we offer free installation for TVs and large appliances in Nairobi. For other areas, installation services are available at an additional cost. Contact us for pricing.',
+                'question' => 'Do you offer size exchanges?',
+                'answer' => 'Yes, we offer free size exchanges within 14 days of purchase for clothing items. The item must be unworn with original tags attached. Contact us to arrange an exchange.',
                 'category' => 'technical',
                 'order' => 3,
                 'is_active' => true
             ],
             [
                 'question' => 'Can you help me choose the right product?',
-                'answer' => 'Absolutely! Our product experts can help you choose the right product based on your needs, budget, and requirements. Contact us for personalized recommendations.',
+                'answer' => 'Absolutely! Our fashion and beauty experts can help you choose the right products based on your style, skin type, and preferences. Contact us for personalized recommendations and styling advice.',
                 'category' => 'technical',
                 'order' => 4,
                 'is_active' => true

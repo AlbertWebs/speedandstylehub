@@ -77,7 +77,7 @@
                 </div>
 
                 <!-- Main Banner Carousel -->
-                <div class="lg:col-span-3 relative">
+                <div class="lg:col-span-3 relative hidden md:block">
                     @if($carouselSlides->count() > 0)
                         <div class="carousel-container relative overflow-hidden rounded-none lg:rounded-lg -mx-4 lg:mx-0">
                             @foreach($carouselSlides as $index => $slide)
