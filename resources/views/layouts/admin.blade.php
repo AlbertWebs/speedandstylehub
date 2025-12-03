@@ -23,11 +23,12 @@
     @stack('styles')
 </head>
 <body class="bg-gray-100">
-    <div x-data="{ sidebarOpen: true }" class="flex h-screen">
+    <div x-data="{ sidebarOpen: false }" class="flex h-screen">
         <!-- Sidebar -->
         <div class="fixed inset-y-0 left-0 z-50 w-64 bg-black transform transition-transform duration-300 ease-in-out lg:translate-x-0"
              :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}"
-             x-show="true">
+             x-show="true"
+             x-cloak>
             <div class="flex items-center justify-between h-16 px-6 bg-gray-900">
                 <h1 class="text-white font-bold text-lg">Admin Panel</h1>
                 <button @click="sidebarOpen = false" class="text-white lg:hidden">
@@ -110,23 +111,23 @@
         </div>
         
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col ml-0 lg:ml-64">
+        <div class="flex-1 flex flex-col ml-0 lg:ml-64 pb-16 lg:pb-0">
             <!-- Top Navigation -->
-            <header class="bg-white shadow-sm border-b">
-                <div class="flex items-center justify-between h-16 px-6">
+            <header class="bg-white shadow-sm border-b sticky top-0 z-40">
+                <div class="flex items-center justify-between h-16 px-4 sm:px-6">
                     <div class="flex items-center">
-                        <button @click="sidebarOpen = true" class="text-gray-600 lg:hidden">
-                            <i class="fas fa-bars"></i>
+                        <button @click="sidebarOpen = true" class="text-gray-600 lg:hidden mr-3">
+                            <i class="fas fa-bars text-xl"></i>
                         </button>
                         <button @click="sidebarOpen = !sidebarOpen" class="text-gray-600 hidden lg:block mr-4" title="Toggle Sidebar">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <h1 class="text-xl font-semibold text-gray-800">@yield('title', 'Dashboard')</h1>
+                        <h1 class="text-lg sm:text-xl font-semibold text-gray-800 truncate">@yield('title', 'Dashboard')</h1>
                     </div>
                     
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 sm:space-x-4">
                         <!-- Quick Stats -->
-                        <div class="hidden md:flex items-center space-x-4 text-sm text-gray-600">
+                        <div class="hidden lg:flex items-center space-x-4 text-sm text-gray-600">
                             <div class="flex items-center">
                                 <i class="fas fa-box text-blue-500 mr-1"></i>
                                 <span>{{ \App\Models\Product::count() }} products</span>
@@ -143,11 +144,12 @@
                                 <div class="w-8 h-8 bg-[#7b2c2cf1] rounded-full flex items-center justify-center">
                                     <span class="text-white text-sm font-semibold">{{ substr(auth()->user()->name, 0, 1) }}</span>
                                 </div>
-                                <span class="hidden md:block text-sm">{{ auth()->user()->name }}</span>
-                                <i class="fas fa-chevron-down text-xs"></i>
+                                <span class="hidden lg:block text-sm">{{ auth()->user()->name }}</span>
+                                <i class="fas fa-chevron-down text-xs hidden lg:block"></i>
                             </button>
                             
                             <div x-show="open" @click.away="open = false" 
+                                 x-cloak
                                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                                 <div class="px-4 py-2 text-xs text-gray-500 border-b">
                                     Signed in as<br>
@@ -180,7 +182,7 @@
             </header>
             
             <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto p-6">
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6">
                 <!-- Breadcrumbs -->
                 <nav class="flex mb-6" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -258,6 +260,77 @@
                 @yield('content')
             </main>
         </div>
+        
+        <!-- Mobile Bottom Navigation -->
+        <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden">
+            <div class="flex items-center justify-around h-16 px-2">
+                <!-- Dashboard -->
+                <a href="{{ route('admin.dashboard') }}" class="flex flex-col items-center justify-center flex-1 py-2 {{ request()->routeIs('admin.dashboard') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] transition-colors">
+                    <i class="fas fa-tachometer-alt text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Dashboard</span>
+                </a>
+
+                <!-- Products -->
+                <a href="{{ route('admin.products.index') }}" class="flex flex-col items-center justify-center flex-1 py-2 {{ request()->routeIs('admin.products.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] transition-colors">
+                    <i class="fas fa-box text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Products</span>
+                </a>
+
+                <!-- Categories -->
+                <a href="{{ route('admin.categories.index') }}" class="flex flex-col items-center justify-center flex-1 py-2 {{ request()->routeIs('admin.categories.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] transition-colors">
+                    <i class="fas fa-tags text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Categories</span>
+                </a>
+
+                <!-- Orders -->
+                <a href="{{ route('admin.orders.index') }}" class="flex flex-col items-center justify-center flex-1 py-2 relative {{ request()->routeIs('admin.orders.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] transition-colors">
+                    <i class="fas fa-shopping-cart text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Orders</span>
+                </a>
+
+                <!-- More Menu -->
+                <div class="relative flex-1" x-data="{ open: false }">
+                    <button @click="open = !open" class="flex flex-col items-center justify-center w-full py-2 {{ request()->routeIs('admin.faqs.*') || request()->routeIs('admin.contact-messages.*') || request()->routeIs('admin.carousel-slides.*') || request()->routeIs('admin.users.*') || request()->routeIs('admin.settings') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] transition-colors">
+                        <i class="fas fa-ellipsis-h text-xl mb-1"></i>
+                        <span class="text-xs font-medium">More</span>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div x-show="open" 
+                         @click.away="open = false"
+                         x-cloak
+                         class="absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-50">
+                        <a href="{{ route('admin.faqs.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.faqs.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                            <i class="fas fa-question-circle w-5 mr-3"></i>
+                            <span>FAQs</span>
+                        </a>
+                        <a href="{{ route('admin.contact-messages.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.contact-messages.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                            <i class="fas fa-envelope w-5 mr-3"></i>
+                            <span>Messages</span>
+                        </a>
+                        <a href="{{ route('admin.carousel-slides.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.carousel-slides.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                            <i class="fas fa-images w-5 mr-3"></i>
+                            <span>Carousel</span>
+                        </a>
+                        <a href="{{ route('admin.users.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.users.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                            <i class="fas fa-user-shield w-5 mr-3"></i>
+                            <span>Users</span>
+                        </a>
+                        <a href="{{ route('admin.settings') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.settings') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                            <i class="fas fa-cog w-5 mr-3"></i>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Sidebar Backdrop (Mobile) -->
+        <div x-show="sidebarOpen" 
+             @click="sidebarOpen = false"
+             x-cloak
+             class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+             style="display: none;"></div>
     </div>
     
     @stack('scripts')

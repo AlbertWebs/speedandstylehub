@@ -1,12 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'Fashion and Personal Care Products & Technology Products - Speed and Style Hub Kenya')
-@section('description', 'Shop the latest Fashion and Personal Care Products and technology products in Kenya. Find smartphones, laptops, cameras, tablets, and more at Speed and Style Hub. Fast delivery and excellent customer service.')
-@section('keywords', 'Fashion and Personal Care Products Kenya, smartphones Nairobi, laptops Kenya, cameras Kenya, tablets Kenya, technology store, Speed and Style Hub, online Fashion and Personal Care Products shop')
-@section('og_title', 'Fashion and Personal Care Products & Technology Products - Speed and Style Hub Kenya')
-@section('og_description', 'Shop the latest Fashion and Personal Care Products and technology products in Kenya. Find smartphones, laptops, cameras, and more at Speed and Style Hub.')
+@php
+    $category = null;
+    if (request()->filled('category')) {
+        $category = \App\Models\Category::where('slug', request()->category)->first();
+    }
+    
+    if ($category && $representativeProduct) {
+        $ogTitle = $category->name . ' - Shop ' . $category->name . ' Products | Speed and Style Hub';
+        $ogDescription = 'Shop ' . $category->name . ' products in Kenya. Quality ' . $category->name . ' at competitive prices. Fast delivery from Speed and Style Hub.';
+        $ogImage = $representativeProduct->main_image_url;
+        $ogImageAlt = $category->name . ' - ' . $representativeProduct->name;
+    } else {
+        $ogTitle = 'Fashion and Personal Care Products & Technology Products - Speed and Style Hub Kenya';
+        $ogDescription = 'Shop the latest Fashion and Personal Care Products and technology products in Kenya. Find smartphones, laptops, cameras, and more at Speed and Style Hub.';
+        $ogImage = asset('images/logo.svg');
+        $ogImageAlt = 'Speed and Style Hub';
+    }
+@endphp
+
+@section('title', $category ? $category->name . ' - Shop ' . $category->name . ' Products | Speed and Style Hub' : 'Fashion and Personal Care Products & Technology Products - Speed and Style Hub Kenya')
+@section('description', $category ? 'Shop ' . $category->name . ' products in Kenya. Quality ' . $category->name . ' at competitive prices. Fast delivery and excellent customer service from Speed and Style Hub.' : 'Shop the latest Fashion and Personal Care Products and technology products in Kenya. Find smartphones, laptops, cameras, tablets, and more at Speed and Style Hub. Fast delivery and excellent customer service.')
+@section('keywords', $category ? $category->name . ', ' . $category->name . ' Kenya, Fashion and Personal Care Products Kenya, Speed and Style Hub, buy online Kenya' : 'Fashion and Personal Care Products Kenya, smartphones Nairobi, laptops Kenya, cameras Kenya, tablets Kenya, technology store, Speed and Style Hub, online Fashion and Personal Care Products shop')
+@section('og_title', $ogTitle)
+@section('og_description', $ogDescription)
 @section('og_type', 'website')
-@section('og_image', asset('images/logo.svg'))
+@section('og_image', $ogImage)
+@section('og_image_alt', $ogImageAlt)
+@section('twitter_title', $ogTitle)
+@section('twitter_description', $ogDescription)
+@section('twitter_image', $ogImage)
 
 @section('structured_data')
 @php

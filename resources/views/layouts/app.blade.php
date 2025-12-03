@@ -16,10 +16,18 @@
     <meta property="og:title" content="@yield('og_title', config('app.name', 'Speed and Style Hub'))">
     <meta property="og:description" content="@yield('og_description', 'Shop the latest fashion and beauty trends at Speed and Style Hub')">
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:url" content="{{ request()->url() }}">
+    <meta property="og:url" content="@yield('og_url', request()->url())">
     <meta property="og:image" content="@yield('og_image', asset('images/logo.svg'))">
+    <meta property="og:image:width" content="@yield('og_image_width', '1200')">
+    <meta property="og:image:height" content="@yield('og_image_height', '630')">
+    <meta property="og:image:alt" content="@yield('og_image_alt', config('app.name', 'Speed and Style Hub'))">
     <meta property="og:site_name" content="Speed and Style Hub">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    @hasSection('og_price_amount')
+    <meta property="product:price:amount" content="@yield('og_price_amount')">
+    <meta property="product:price:currency" content="@yield('og_price_currency', 'KES')">
+    <meta property="product:availability" content="@yield('og_product_availability', 'in stock')">
+    @endif
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">

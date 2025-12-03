@@ -78,6 +78,22 @@ class ProductsController extends Controller
             ->limit(4)
             ->get();
         
+        // Get representative product for category (for OG tags)
+        $representativeProduct = null;
+        if ($request->filled('category')) {
+            $category = Category::where('slug', $request->category)->first();
+            if ($category) {
+                $representativeProduct = Product::with('category')
+                    ->active()
+                    ->inStock()
+                    ->where('category_id', $category->id)
+                    ->whereNotNull('image')
+                    ->orderBy('is_featured', 'desc')
+                    ->orderBy('rating', 'desc')
+                    ->first();
+            }
+        }
+        
         // Paginate products
         $products = $query->paginate(12)->withQueryString();
         
@@ -92,7 +108,8 @@ class ProductsController extends Controller
             'featuredProducts',
             'totalProducts',
             'minPrice',
-            'maxPrice'
+            'maxPrice',
+            'representativeProduct'
         ));
     }
     

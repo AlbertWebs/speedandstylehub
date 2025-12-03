@@ -5,12 +5,12 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex justify-between items-center">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Users</h1>
-            <p class="text-gray-600">Manage user accounts and permissions</p>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Users</h1>
+            <p class="text-sm sm:text-base text-gray-600">Manage user accounts and permissions</p>
         </div>
-        <a href="{{ route('admin.users.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        <a href="{{ route('admin.users.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
             <i class="fas fa-plus mr-2"></i>New User
         </a>
     </div>

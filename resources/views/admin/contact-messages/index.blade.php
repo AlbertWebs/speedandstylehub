@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container mx-auto px-6 py-8">
-    <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Contact Messages</h1>
-        <div class="flex space-x-4">
-            <form action="{{ route('admin.contact-messages.mark-all-read') }}" method="POST" class="inline">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <h1 class="text-xl sm:text-3xl font-bold text-gray-900">Contact Messages</h1>
+        <div class="flex space-x-4 w-full sm:w-auto">
+            <form action="{{ route('admin.contact-messages.mark-all-read') }}" method="POST" class="inline w-full sm:w-auto">
                 @csrf
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    Mark All as Read
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto text-sm sm:text-base">
+                    <i class="fas fa-check-double mr-2"></i>Mark All as Read
                 </button>
             </form>
         </div>
